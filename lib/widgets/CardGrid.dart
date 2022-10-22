@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 
 class CardGrid extends StatelessWidget {
   const CardGrid({super.key});
@@ -6,6 +7,7 @@ class CardGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
+    BasicCss basicCss = BasicCss();
 
     return Center(
       child: GridView.count(
@@ -18,15 +20,21 @@ class CardGrid extends StatelessWidget {
           children: [
             Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Container(
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(128, 186, 63, 197)),
+                  decoration: BoxDecoration(
+                    color: basicCss.basicColorSmother,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
                   child: IconButton(
+                    padding: EdgeInsets.zero,
                     iconSize: 130,
                     onPressed: null,
                     icon: Image.asset(
                         'lib/assets/images/uesb-campus-itapetinga.jpg'),
                   )),
               ElevatedButton.icon(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(basicCss.basicColorSmother)),
                 onPressed: null,
                 icon: const Icon(Icons.smart_button_rounded),
                 label: const Text("Eventos Itapetinga"),
@@ -34,14 +42,19 @@ class CardGrid extends StatelessWidget {
             ]),
             Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Container(
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(128, 186, 63, 197)),
+                  decoration: BoxDecoration(
+                      color: basicCss.basicColorSmother,
+                      borderRadius: BorderRadius.circular(25)),
                   child: IconButton(
+                    padding: EdgeInsets.zero,
                     iconSize: 130,
                     onPressed: null,
                     icon: Image.asset('lib/assets/images/campus-jequie.jpeg'),
                   )),
               ElevatedButton.icon(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(basicCss.basicColorSmother)),
                 onPressed: null,
                 icon: const Icon(Icons.smart_button_rounded),
                 label: const Text("Eventos Jequié"),
@@ -49,14 +62,19 @@ class CardGrid extends StatelessWidget {
             ]),
             Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Container(
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(128, 186, 63, 197)),
+                  decoration: BoxDecoration(
+                      color: basicCss.basicColorSmother,
+                      borderRadius: BorderRadius.circular(25)),
                   child: IconButton(
+                    padding: EdgeInsets.zero,
                     iconSize: 130,
                     onPressed: null,
                     icon: Image.asset('lib/assets/images/uesb-conquista.jpg'),
                   )),
               ElevatedButton.icon(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(basicCss.basicColorSmother)),
                 onPressed: null,
                 icon: const Icon(Icons.smart_button_rounded),
                 label: const Text("Eventos Conquista"),
