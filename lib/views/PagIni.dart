@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/widgets/NavigationMenu.dart';
 import 'package:eventos_uesb/widgets/CardGrid.dart';
@@ -16,24 +18,26 @@ class pagIni extends StatelessWidget {
     return MaterialApp(
         title: "Página Inicial",
         home: Scaffold(
-          bottomNavigationBar: Row(children: [navigationMenu]),
-          body: Center(
-              child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              stops: const [
-                0.4,
-                0.7,
-              ],
-              colors: [
-                basicCss.basicColor,
-                basicCss.basicColorSmother,
-              ],
-            )),
-            child: cardGrid,
-          )),
-        ));
+            bottomNavigationBar: Row(children: [navigationMenu]),
+            floatingActionButton: const IconButton(
+                icon: Icon(Icons.notifications), onPressed: null, iconSize: 35),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+            body: Center(
+                child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: const [
+                  0.4,
+                  0.7,
+                ],
+                colors: [
+                  basicCss.basicColor,
+                  basicCss.basicColorSmother,
+                ],
+              )),
+              child: cardGrid,
+            ))));
   }
 }

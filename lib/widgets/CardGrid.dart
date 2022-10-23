@@ -1,5 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
+import 'package:eventos_uesb/widgets/DefaultTextButton.dart';
 
 class CardGrid extends StatelessWidget {
   const CardGrid({super.key});
@@ -8,14 +11,15 @@ class CardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     BasicCss basicCss = BasicCss();
+    DefaultTextButton defaultTextButton = const DefaultTextButton();
 
     return Center(
       child: GridView.count(
           crossAxisCount: 1,
           shrinkWrap: true,
-          childAspectRatio: 1.25,
+          childAspectRatio: 1.27,
           padding: EdgeInsets.symmetric(
-              vertical: mediaQuery.size.height / 20,
+              vertical: mediaQuery.size.height / 100,
               horizontal: mediaQuery.size.width / 5),
           children: [
             Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -79,7 +83,16 @@ class CardGrid extends StatelessWidget {
                 icon: const Icon(Icons.smart_button_rounded),
                 label: const Text("Eventos Conquista"),
               )
-            ])
+            ]),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.zero,
+                    child: defaultTextButton,
+                  ),
+                ])
           ]),
     );
   }
