@@ -24,19 +24,8 @@ class pagIni extends StatelessWidget {
             floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
             body: Center(
                 child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: const [
-                  0.4,
-                  0.7,
-                ],
-                colors: [
-                  basicCss.basicColor,
-                  basicCss.basicColorSmother,
-                ],
-              )),
+              padding: EdgeInsets.zero,
+              decoration: basicCss.iniatilzeDefaultBackground(),
               child: cardGrid,
             ))));
   }
