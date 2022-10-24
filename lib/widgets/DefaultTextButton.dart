@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 
 class DefaultTextButton extends StatelessWidget {
-  const DefaultTextButton({super.key});
+  const DefaultTextButton({super.key, required this.textButton});
+
+  final String textButton;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class DefaultTextButton extends StatelessWidget {
           style: TextButton.styleFrom(
               textStyle: const TextStyle(
                   color: Colors.white, fontSize: 15, fontFamily: 'arial')),
-          child: const Text("Validar Certificado"),
+          child: Text(textButton),
         )
       ],
     );

@@ -11,7 +11,9 @@ class CardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     BasicCss basicCss = BasicCss();
-    DefaultTextButton defaultTextButton = const DefaultTextButton();
+    DefaultTextButton defaultTextButton = const DefaultTextButton(
+      textButton: 'Validar Certificado',
+    );
 
     return Center(
       child: GridView.count(
