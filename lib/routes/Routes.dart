@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:eventos_uesb/views/PagIni.dart';
 import 'package:eventos_uesb/views/TelaLogin.dart';
 import 'package:eventos_uesb/views/TelaCadastro.dart';
+import 'package:eventos_uesb/views/PagUsuario.dart';
 
 class Routes extends StatelessWidget {
   const Routes({super.key});
@@ -14,7 +15,8 @@ class Routes extends StatelessWidget {
       routes: {
         '/': (context) => pagIni(),
         '/login': (context) => const TelaLogin(),
-        '/cadastro': (context) => const TelaCadastro()
+        '/cadastro': (context) => const TelaCadastro(),
+        '/usuario': (context) => const PagUsuario(),
       },
     );
   }
