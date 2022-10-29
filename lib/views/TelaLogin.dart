@@ -13,63 +13,61 @@ class TelaLogin extends StatelessWidget {
     DefaultTextButton defaultTextButton =
         const DefaultTextButton(textButton: 'Esqueci Minha Senha');
 
-    return MaterialApp(
-        title: "Tela Login",
-        home: Scaffold(
-          body: Center(
-            child: Container(
-                decoration: basicCss.iniatilzeDefaultBackground(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
-                      'lib/assets/images/uesb-logo.png',
-                      scale: 3,
-                    ),
-                    const TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          label: Text.rich(TextSpan(children: [
-                            WidgetSpan(child: Text('Login')),
-                            WidgetSpan(
-                                child: Text(
-                              '*',
-                              style: TextStyle(color: Colors.redAccent),
-                            ))
-                          ]))),
-                    ),
-                    const TextField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          label: Text.rich(TextSpan(children: [
-                            WidgetSpan(child: Text('Senha')),
-                            WidgetSpan(
-                                child: Text(
-                              '*',
-                              style: TextStyle(color: Colors.redAccent),
-                            ))
-                          ]))),
-                    ),
-                    TextButton(
-                        onPressed: null,
-                        style: TextButton.styleFrom(
-                            backgroundColor: basicCss.basicColor,
-                            textStyle: const TextStyle(
-                                fontSize: 20, fontFamily: 'arial')),
-                        child: const Text('Entrar')),
-                    TextButton(
-                        onPressed: null,
-                        style: TextButton.styleFrom(
-                            backgroundColor: basicCss.basicColorSmother,
-                            textStyle: const TextStyle(
-                                fontSize: 20, fontFamily: 'arial')),
-                        child: const Text('Cadastrar-se')),
-                    defaultTextButton
-                  ],
-                )),
-          ),
-        ));
+    return Scaffold(
+      body: Center(
+        child: Container(
+            decoration: basicCss.iniatilzeDefaultBackground(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image.asset(
+                  'lib/assets/images/uesb-logo.png',
+                  scale: 3,
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      label: Text.rich(TextSpan(children: [
+                        WidgetSpan(child: Text('Login')),
+                        WidgetSpan(
+                            child: Text(
+                          '*',
+                          style: TextStyle(color: Colors.redAccent),
+                        ))
+                      ]))),
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      label: Text.rich(TextSpan(children: [
+                        WidgetSpan(child: Text('Senha')),
+                        WidgetSpan(
+                            child: Text(
+                          '*',
+                          style: TextStyle(color: Colors.redAccent),
+                        ))
+                      ]))),
+                ),
+                TextButton(
+                    onPressed: null,
+                    style: TextButton.styleFrom(
+                        backgroundColor: basicCss.basicColor,
+                        textStyle:
+                            const TextStyle(fontSize: 20, fontFamily: 'arial')),
+                    child: const Text('Entrar')),
+                TextButton(
+                    onPressed: null,
+                    style: TextButton.styleFrom(
+                        backgroundColor: basicCss.basicColorSmother,
+                        textStyle:
+                            const TextStyle(fontSize: 20, fontFamily: 'arial')),
+                    child: const Text('Cadastrar-se')),
+                defaultTextButton
+              ],
+            )),
+      ),
+    );
   }
 }

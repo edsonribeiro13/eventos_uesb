@@ -6,6 +6,8 @@ class BasicCss {
   Color basicColor = const Color.fromARGB(224, 186, 63, 197);
   Color basicColorSmother = const Color.fromARGB(123, 185, 92, 177);
 
+  Color greyTone = const Color.fromARGB(233, 221, 199, 255);
+
   BoxDecoration iniatilzeDefaultBackground() {
     return BoxDecoration(
         gradient: LinearGradient(

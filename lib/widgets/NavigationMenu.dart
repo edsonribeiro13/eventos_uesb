@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 
@@ -17,21 +19,27 @@ class NavigationMenu extends StatelessWidget {
       width: mediaQuery.size.width,
       decoration: BoxDecoration(color: basicCss.basicColor),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        IconButton(
-            onPressed: null,
-            iconSize: 30,
+        ElevatedButton.icon(
             icon: const Icon(Icons.home_filled),
-            color: basicCss.basicColorSmother),
-        IconButton(
-            onPressed: null,
-            iconSize: 30,
+            label: const Text('Home'),
+            onPressed: () => Navigator.pushNamed(context, '/'),
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(basicCss.basicColorSmother))),
+        ElevatedButton.icon(
+            onPressed: () => Navigator.pushNamed(context, '/usuario'),
+            label: const Text('Usuário'),
             icon: const Icon(Icons.person),
-            color: basicCss.basicColorSmother),
-        IconButton(
-            onPressed: null,
-            iconSize: 30,
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(basicCss.basicColorSmother))),
+        ElevatedButton.icon(
+            onPressed: () => exit(0),
+            label: const Text('Sair'),
             icon: const Icon(Icons.exit_to_app),
-            color: basicCss.basicColorSmother)
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(basicCss.basicColorSmother)))
       ]),
     );
   }

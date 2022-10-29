@@ -15,18 +15,16 @@ class pagIni extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BasicCss basicCss = BasicCss();
-    return MaterialApp(
-        title: "Página Inicial",
-        home: Scaffold(
-            bottomNavigationBar: Row(children: [navigationMenu]),
-            floatingActionButton: const IconButton(
-                icon: Icon(Icons.notifications), onPressed: null, iconSize: 35),
-            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-            body: Center(
-                child: Container(
-              padding: EdgeInsets.zero,
-              decoration: basicCss.iniatilzeDefaultBackground(),
-              child: cardGrid,
-            ))));
+    return Scaffold(
+        bottomNavigationBar: Row(children: [navigationMenu]),
+        floatingActionButton: const IconButton(
+            icon: Icon(Icons.notifications), onPressed: null, iconSize: 35),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        body: Center(
+            child: Container(
+          padding: EdgeInsets.zero,
+          decoration: basicCss.iniatilzeDefaultBackground(),
+          child: cardGrid,
+        )));
   }
 }
