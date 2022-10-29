@@ -6,18 +6,13 @@ import 'package:eventos_uesb/views/TelaLogin.dart';
 import 'package:eventos_uesb/views/TelaCadastro.dart';
 import 'package:eventos_uesb/views/PagUsuario.dart';
 
-class Routes extends StatelessWidget {
-  const Routes({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/': (context) => pagIni(),
-        '/login': (context) => const TelaLogin(),
-        '/cadastro': (context) => const TelaCadastro(),
-        '/usuario': (context) => const PagUsuario(),
-      },
-    );
+class Routes {
+  createRouteTable() {
+    return MaterialApp(initialRoute: '/', routes: {
+      '/': (context) => pagIni(),
+      '/login': (context) => const TelaLogin(),
+      '/cadastro': (context) => const TelaCadastro(),
+      '/usuario': (context) => const PagUsuario(),
+    });
   }
 }
