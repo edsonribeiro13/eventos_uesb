@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
+import 'package:eventos_uesb/utils/store/UserStore.dart';
 
 // ignore: camel_case_types
 class NavigationMenu extends StatelessWidget {
@@ -27,7 +28,13 @@ class NavigationMenu extends StatelessWidget {
                 backgroundColor:
                     MaterialStateProperty.all(basicCss.basicColorSmother))),
         ElevatedButton.icon(
-            onPressed: () => Navigator.pushNamed(context, '/usuario'),
+            onPressed: () async {
+              if (await UserStore().getUser() != null) {
+                Navigator.pushNamed(context, '/usuario');
+              } else {
+                Navigator.pushNamed(context, '/login');
+              }
+            },
             label: const Text('Usuário'),
             icon: const Icon(Icons.person),
             style: ButtonStyle(
