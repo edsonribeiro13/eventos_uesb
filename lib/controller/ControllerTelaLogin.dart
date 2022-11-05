@@ -19,7 +19,7 @@ class ControllerTelaLogin extends StatefulWidget {
         textFieldController[0].text, textFieldController[1].text);
 
     if (result.rows.toString() != '()') {
-      userStore.addUser(textFieldController[0]);
+      userStore.addUser(textFieldController[0].text);
       return true;
     } else {
       textFieldController[0].text = '';
