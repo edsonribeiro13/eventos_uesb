@@ -22,15 +22,19 @@ class Querys {
   }
 
   createNewUser(nome, CPF, senha) async {
-    var conn = DbConnection().connection();
-    await conn.query(
-        'insert into usuarios (nome, CPF, senha)(?, ?, ?)', [nome, CPF, senha]);
+    var conn = await DbConnection().connection();
+    await conn.connect();
+    var stmt = await conn.prepare(
+      "INSERT INTO usuarios (nome, CPF, senha) VALUES (?, ?, ?)",
+    );
+    await stmt.execute([nome, CPF, senha]);
   }
 
   searchUser(CPF, senha) async {
-    var conn = DbConnection().connection();
-    await conn.query(
-        'select cpf, senha from usuarios where cpf = ? and senha = ?',
-        [CPF, senha]);
+    var conn = await DbConnection().connection();
+    await conn.connect();
+    return await conn.execute(
+        'select cpf, senha from usuarios where cpf = :cpf and senha = :senha',
+        {'cpf': CPF, 'senha': senha});
   }
 }

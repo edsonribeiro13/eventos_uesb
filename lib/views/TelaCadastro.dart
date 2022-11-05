@@ -2,9 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
+import 'package:eventos_uesb/controller/ControllerTelaCadastro.dart';
 
-class TelaCadastro extends StatelessWidget {
-  const TelaCadastro({super.key});
+class TelaCadastro extends State<ControllerTelaCadastro> {
+  var textFieldController = List<TextEditingController>.generate(
+      3, (index) => TextEditingController());
+  bool cadastroErro = false;
+  String cadastroErroMensagem = '';
+  ControllerTelaCadastro controllerTelaCadastro =
+      const ControllerTelaCadastro();
+
+  @override
+  void initState() {
+    cadastroErro = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +33,9 @@ class TelaCadastro extends StatelessWidget {
                   'lib/assets/images/uesb-logo.png',
                   scale: 3,
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: textFieldController[0],
+                  decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       label: Text.rich(TextSpan(children: [
@@ -34,8 +47,9 @@ class TelaCadastro extends StatelessWidget {
                         ))
                       ]))),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: textFieldController[1],
+                  decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
                       label: Text.rich(TextSpan(children: [
@@ -47,11 +61,14 @@ class TelaCadastro extends StatelessWidget {
                         ))
                       ]))),
                 ),
-                const TextField(
+                TextField(
+                  controller: textFieldController[2],
                   decoration: InputDecoration(
+                      errorText:
+                          cadastroErro == true ? cadastroErroMensagem : null,
                       filled: true,
                       fillColor: Colors.white,
-                      label: Text.rich(TextSpan(children: [
+                      label: const Text.rich(TextSpan(children: [
                         WidgetSpan(child: Text('Senha')),
                         WidgetSpan(
                             child: Text(
@@ -61,7 +78,19 @@ class TelaCadastro extends StatelessWidget {
                       ]))),
                 ),
                 TextButton(
-                    onPressed: null,
+                    onPressed: (() async {
+                      var result = await controllerTelaCadastro
+                          .cadastroController(textFieldController);
+                      if (result[0] == false) {
+                        cadastroErroMensagem = result[1];
+                        setState(() {
+                          cadastroErro = true;
+                        });
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        Navigator.pushNamed(context, '/usuario');
+                      }
+                    }),
                     style: TextButton.styleFrom(
                         backgroundColor: basicCss.basicColor,
                         textStyle:

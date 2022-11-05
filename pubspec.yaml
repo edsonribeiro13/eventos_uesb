@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^3.0.1
   mysql_client: ^0.0.27
   localstore: ^1.2.3
+  cpf_cnpj_validator: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,16 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/views/PagIni.dart';
-import 'package:eventos_uesb/views/TelaLogin.dart';
-import 'package:eventos_uesb/views/TelaCadastro.dart';
+import 'package:eventos_uesb/controller/ControllerTelaLogin.dart';
+import 'package:eventos_uesb/controller/ControllerTelaCadastro.dart';
 import 'package:eventos_uesb/views/PagUsuario.dart';
 
 class Routes {
   createRouteTable() {
     return MaterialApp(initialRoute: '/', routes: {
       '/': (context) => pagIni(),
-      '/login': (context) => const TelaLogin(),
-      '/cadastro': (context) => const TelaCadastro(),
+      '/login': (context) => const ControllerTelaLogin(),
+      '/cadastro': (context) => const ControllerTelaCadastro(),
       '/usuario': (context) => const PagUsuario(),
     });
   }
