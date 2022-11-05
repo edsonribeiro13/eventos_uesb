@@ -28,9 +28,10 @@ class Querys {
   }
 
   searchUser(CPF, senha) async {
-    var conn = DbConnection().connection();
-    await conn.query(
-        'select cpf, senha from usuarios where cpf = ? and senha = ?',
-        [CPF, senha]);
+    var conn = await DbConnection().connection();
+    await conn.connect();
+    return await conn.execute(
+        'select cpf, senha from usuarios where cpf = :cpf and senha = :senha',
+        {'cpf': CPF, 'senha': senha});
   }
 }
