@@ -5,6 +5,7 @@ import 'package:eventos_uesb/views/PagIni.dart';
 import 'package:eventos_uesb/controller/ControllerTelaLogin.dart';
 import 'package:eventos_uesb/controller/ControllerTelaCadastro.dart';
 import 'package:eventos_uesb/views/PagUsuario.dart';
+import 'package:eventos_uesb/views/TelaValidarCertificado.dart';
 
 class Routes {
   createRouteTable() {
@@ -13,6 +14,7 @@ class Routes {
       '/login': (context) => const ControllerTelaLogin(),
       '/cadastro': (context) => const ControllerTelaCadastro(),
       '/usuario': (context) => const PagUsuario(),
+      '/validate': (context) => const TelaValidarCertificado()
     });
   }
 }
