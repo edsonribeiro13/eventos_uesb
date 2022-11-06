@@ -23,7 +23,7 @@ class TelaLogin extends State<ControllerTelaLogin> {
     BasicCss basicCss = BasicCss();
     DefaultTextButton defaultTextButton = const DefaultTextButton(
       textButton: 'Esqueci Minha Senha',
-      routeName: '',
+      routeName: '/retrieve',
     );
 
     return Scaffold(

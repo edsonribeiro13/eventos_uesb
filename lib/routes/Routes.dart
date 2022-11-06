@@ -7,6 +7,7 @@ import 'package:eventos_uesb/controller/ControllerTelaCadastro.dart';
 import 'package:eventos_uesb/views/PagUsuario.dart';
 import 'package:eventos_uesb/views/TelaValidarCertificado.dart';
 import 'package:eventos_uesb/views/TelaCertificados.dart';
+import 'package:eventos_uesb/views/TelaRecuperarSenha.dart';
 
 class Routes {
   createRouteTable() {
@@ -16,7 +17,8 @@ class Routes {
       '/cadastro': (context) => const ControllerTelaCadastro(),
       '/usuario': (context) => const PagUsuario(),
       '/validate': (context) => const TelaValidarCertificado(),
-      '/certificates': (context) => TelaCertificados()
+      '/certificates': (context) => TelaCertificados(),
+      '/retrieve': (context) => const TelaRecuperarSenha()
     });
   }
 }
