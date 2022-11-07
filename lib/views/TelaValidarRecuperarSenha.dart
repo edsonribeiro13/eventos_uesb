@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 
-class TelaRecuperarSenha extends StatelessWidget {
-  const TelaRecuperarSenha({super.key});
+class TelaValidarRecuperarSenha extends StatelessWidget {
+  const TelaValidarRecuperarSenha({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class TelaRecuperarSenha extends StatelessWidget {
                       filled: true,
                       fillColor: Colors.white,
                       label: Text.rich(TextSpan(children: [
-                        WidgetSpan(child: Text('Código de recuperação')),
+                        WidgetSpan(child: Text('Código de verificação')),
                         WidgetSpan(
                             child: Text(
                           '*',
@@ -33,15 +33,13 @@ class TelaRecuperarSenha extends StatelessWidget {
                       ]))),
                 ),
                 TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/retrievevalidate');
-                    },
+                    onPressed: null,
                     style: TextButton.styleFrom(
                         backgroundColor: basicCss.basicColorSmother,
-                        foregroundColor: basicCss.basicColor,
+                        foregroundColor: basicCss.basicColorSmother,
                         textStyle:
                             const TextStyle(fontSize: 20, fontFamily: 'arial')),
-                    child: const Text('Validar código'))
+                    child: const Text('Recuperar'))
               ],
             )));
   }
