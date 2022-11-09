@@ -8,94 +8,100 @@ class CardGrid extends StatelessWidget {
   const CardGrid({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     BasicCss basicCss = BasicCss();
     DefaultTextButton defaultTextButton = const DefaultTextButton(
       textButton: 'Validar Certificado',
+      routeName: '/validate',
     );
 
-    return Center(
-      child: GridView.count(
-          crossAxisCount: 1,
-          shrinkWrap: true,
-          childAspectRatio: 1.27,
-          padding: EdgeInsets.symmetric(
-              vertical: mediaQuery.size.height / 100,
-              horizontal: mediaQuery.size.width / 5),
-          children: [
-            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Container(
-                  decoration: BoxDecoration(
-                    color: basicCss.basicColorSmother,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 130,
-                    onPressed: null,
-                    icon: Image.asset(
-                        'lib/assets/images/uesb-campus-itapetinga.jpg'),
-                  )),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(basicCss.basicColorSmother)),
-                onPressed: null,
-                icon: const Icon(Icons.smart_button_rounded),
-                label: const Text("Eventos Itapetinga"),
-              )
+    return Column(
+      children: [
+        GridView.count(
+            crossAxisCount: 1,
+            shrinkWrap: true,
+            childAspectRatio: 1.3,
+            padding: EdgeInsets.symmetric(
+                vertical: mediaQuery.size.height / 100,
+                horizontal: mediaQuery.size.width / 5),
+            children: [
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                          color: basicCss.basicColorSmother,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 130,
+                          onPressed: null,
+                          icon: Image.asset(
+                              'lib/assets/images/uesb-campus-itapetinga.jpg'),
+                        ))),
+                ElevatedButton.icon(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          basicCss.basicColorSmother)),
+                  onPressed: () => Navigator.pushNamed(context, '/events'),
+                  icon: const Icon(Icons.smart_button_rounded),
+                  label: const Text("Eventos Itapetinga"),
+                )
+              ]),
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                            color: basicCss.basicColorSmother,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 130,
+                          onPressed: null,
+                          icon: Image.asset(
+                              'lib/assets/images/campus-jequie.jpeg'),
+                        ))),
+                ElevatedButton.icon(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          basicCss.basicColorSmother)),
+                  onPressed: () => Navigator.pushNamed(context, '/events'),
+                  icon: const Icon(Icons.smart_button_rounded),
+                  label: const Text("Eventos Jequié"),
+                )
+              ]),
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                            color: basicCss.basicColorSmother,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 130,
+                          onPressed: null,
+                          icon: Image.asset(
+                              'lib/assets/images/uesb-conquista.jpg'),
+                        ))),
+                ElevatedButton.icon(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          basicCss.basicColorSmother)),
+                  onPressed: () => Navigator.pushNamed(context, '/events'),
+                  icon: const Icon(Icons.smart_button_rounded),
+                  label: const Text("Eventos Conquista"),
+                )
+              ])
             ]),
-            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Container(
-                  decoration: BoxDecoration(
-                      color: basicCss.basicColorSmother,
-                      borderRadius: BorderRadius.circular(25)),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 130,
-                    onPressed: null,
-                    icon: Image.asset('lib/assets/images/campus-jequie.jpeg'),
-                  )),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(basicCss.basicColorSmother)),
-                onPressed: null,
-                icon: const Icon(Icons.smart_button_rounded),
-                label: const Text("Eventos Jequié"),
-              )
-            ]),
-            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Container(
-                  decoration: BoxDecoration(
-                      color: basicCss.basicColorSmother,
-                      borderRadius: BorderRadius.circular(25)),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 130,
-                    onPressed: null,
-                    icon: Image.asset('lib/assets/images/uesb-conquista.jpg'),
-                  )),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(basicCss.basicColorSmother)),
-                onPressed: null,
-                icon: const Icon(Icons.smart_button_rounded),
-                label: const Text("Eventos Conquista"),
-              )
-            ]),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.zero,
-                    child: defaultTextButton,
-                  ),
-                ])
-          ]),
+        defaultTextButton
+      ],
     );
   }
 }

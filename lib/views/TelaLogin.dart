@@ -21,8 +21,10 @@ class TelaLogin extends State<ControllerTelaLogin> {
   @override
   Widget build(BuildContext context) {
     BasicCss basicCss = BasicCss();
-    DefaultTextButton defaultTextButton =
-        const DefaultTextButton(textButton: 'Esqueci Minha Senha');
+    DefaultTextButton defaultTextButton = const DefaultTextButton(
+      textButton: 'Esqueci Minha Senha',
+      routeName: '/retrieve',
+    );
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

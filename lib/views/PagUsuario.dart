@@ -26,19 +26,22 @@ class PagUsuario extends StatelessWidget {
                   'lib/assets/images/uesb-logo.png',
                   scale: 3,
                 ),
-                Card(
-                    color: basicCss.greyTone,
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Text(
-                      "MEUS\nCERTIFICADOS",
-                      style: GoogleFonts.oswald(fontSize: 35),
-                    )),
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/certificates'),
+                    child: Card(
+                        color: basicCss.greyTone,
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Text(
+                          "MEUS\nCERTIFICADOS",
+                          style: GoogleFonts.oswald(fontSize: 35),
+                        ))),
                 Card(
                     color: basicCss.greyTone,
                     elevation: 10,
