@@ -27,66 +27,74 @@ class CardGrid extends StatelessWidget {
                 horizontal: mediaQuery.size.width / 5),
             children: [
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Container(
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                      color: basicCss.basicColorSmother,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      iconSize: 130,
-                      onPressed: null,
-                      icon: Image.asset(
-                          'lib/assets/images/uesb-campus-itapetinga.jpg'),
-                    )),
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                          color: basicCss.basicColorSmother,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 130,
+                          onPressed: null,
+                          icon: Image.asset(
+                              'lib/assets/images/uesb-campus-itapetinga.jpg'),
+                        ))),
                 ElevatedButton.icon(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
-                  onPressed: null,
+                  onPressed: () => Navigator.pushNamed(context, '/events'),
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Itapetinga"),
                 )
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Container(
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                        color: basicCss.basicColorSmother,
-                        borderRadius: BorderRadius.circular(25)),
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      iconSize: 130,
-                      onPressed: null,
-                      icon: Image.asset('lib/assets/images/campus-jequie.jpeg'),
-                    )),
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                            color: basicCss.basicColorSmother,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 130,
+                          onPressed: null,
+                          icon: Image.asset(
+                              'lib/assets/images/campus-jequie.jpeg'),
+                        ))),
                 ElevatedButton.icon(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
-                  onPressed: null,
+                  onPressed: () => Navigator.pushNamed(context, '/events'),
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Jequié"),
                 )
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Container(
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                        color: basicCss.basicColorSmother,
-                        borderRadius: BorderRadius.circular(25)),
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      iconSize: 130,
-                      onPressed: null,
-                      icon: Image.asset('lib/assets/images/uesb-conquista.jpg'),
-                    )),
+                GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                            color: basicCss.basicColorSmother,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 130,
+                          onPressed: null,
+                          icon: Image.asset(
+                              'lib/assets/images/uesb-conquista.jpg'),
+                        ))),
                 ElevatedButton.icon(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
-                  onPressed: null,
+                  onPressed: () => Navigator.pushNamed(context, '/events'),
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Conquista"),
                 )
