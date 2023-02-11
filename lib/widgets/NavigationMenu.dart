@@ -41,7 +41,7 @@ class NavigationMenu extends StatelessWidget {
                 backgroundColor:
                     MaterialStateProperty.all(basicCss.basicColorSmother))),
         ElevatedButton.icon(
-            onPressed: () => exit(0),
+            onPressed: () => {UserStore().deleteUser(), exit(0)},
             label: const Text('Sair'),
             icon: const Icon(Icons.exit_to_app),
             style: ButtonStyle(
