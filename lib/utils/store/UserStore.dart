@@ -19,8 +19,8 @@ class UserStore {
     db.collection('users').doc('1').set({'idUser': idUser});
   }
 
-  deleteUser() {
+  deleteUser() async {
     var db = getInstance();
-    db.collection('users').doc('1').delete();
+    await db.collection('users').doc('1').delete();
   }
 }

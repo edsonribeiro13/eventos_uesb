@@ -27,10 +27,11 @@ class ControllerTelaCadastro extends StatefulWidget {
       userStore.addUser(textFieldController[1].text);
       return [true, ''];
     } catch (e) {
+      print(e);
       textFieldController[0].text = '';
       textFieldController[1].text = '';
       textFieldController[2].text = '';
-      return [false, 'Erro no cadastro, CPF já em uso'];
+      return [false, 'Erro no cadastro'];
     }
   }
 }

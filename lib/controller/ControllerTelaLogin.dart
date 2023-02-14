@@ -18,7 +18,7 @@ class ControllerTelaLogin extends StatefulWidget {
     var result = await querys.searchUser(
         textFieldController[0].text, textFieldController[1].text);
 
-    if (result.rows.toString() != '()') {
+    if (result.length > 0) {
       userStore.addUser(textFieldController[0].text);
       return true;
     } else {
