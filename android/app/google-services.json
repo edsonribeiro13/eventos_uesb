@@ -29,6 +29,13 @@
             {
               "client_id": "306779608954-i6tg5u98lv3pupgst8sk2p2kf00k8eal.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "306779608954-oc4sj0uo1je69a1hc6olng7pt5fbt7n8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eventosUesb"
+              }
             }
           ]
         }

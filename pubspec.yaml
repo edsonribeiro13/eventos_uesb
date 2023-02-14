@@ -42,6 +42,7 @@ dependencies:
   cpf_cnpj_validator: ^2.0.0
   flutter_rating_bar: ^4.0.1
   firebase_core: ^2.5.0
+  cloud_firestore: ^4.3.2
 
 dev_dependencies:
   flutter_test:
