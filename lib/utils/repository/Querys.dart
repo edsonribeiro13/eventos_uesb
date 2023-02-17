@@ -33,4 +33,18 @@ class Querys {
       return data;
     });
   }
+
+  filterEvent(cidade, filtro, valorFiltro) async {
+    var db = await DbConnection().getFirestoreInstance();
+    var docRef =
+        await db.collection('/$cidade').where(filtro, isEqualTo: valorFiltro);
+    final result = await docRef.get().then(
+      (QuerySnapshot querySnapshot) {
+        final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+        return data;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+    return result;
+  }
 }

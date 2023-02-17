@@ -11,6 +11,7 @@ import 'package:eventos_uesb/views/TelaRecuperarSenha.dart';
 import 'package:eventos_uesb/views/TelaValidarRecuperarSenha.dart';
 import 'package:eventos_uesb/views/TelaEventos.dart';
 import 'package:eventos_uesb/views/TelaAvaliarEvento.dart';
+import 'package:eventos_uesb/views/TelaFiltro.dart';
 
 class Routes {
   createRouteTable() {
@@ -20,11 +21,12 @@ class Routes {
       '/cadastro': (context) => const ControllerTelaCadastro(),
       '/usuario': (context) => const PagUsuario(),
       '/validate': (context) => const TelaValidarCertificado(),
-      '/certificates': (context) => TelaCertificados(),
+      '/certificates': (context) => const TelaCertificados(),
       '/retrieve': (context) => const TelaRecuperarSenha(),
       '/retrievevalidate': (context) => const TelaValidarRecuperarSenha(),
-      '/events': (context) => TelaEventos(),
-      '/rateEvent': (context) => const TelaAvaliarEvento()
+      '/events': (context) => const TelaEventos(),
+      '/rateEvent': (context) => const TelaAvaliarEvento(),
+      '/filtrar': (context) => const TelaFiltro()
     });
   }
 }

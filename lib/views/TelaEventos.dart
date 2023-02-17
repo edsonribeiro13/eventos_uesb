@@ -16,9 +16,9 @@ class TelaEventos extends StatelessWidget {
     BasicCss basicCss = BasicCss();
     return Scaffold(
         bottomNavigationBar: const NavigationMenu(),
-        floatingActionButton: const IconButton(
-          onPressed: null,
-          icon: Icon(Icons.filter_alt),
+        floatingActionButton: IconButton(
+          onPressed: () => Navigator.pushNamed(context, '/filtrar'),
+          icon: const Icon(Icons.filter_alt),
           iconSize: 40,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
