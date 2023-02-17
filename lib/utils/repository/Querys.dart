@@ -22,4 +22,15 @@ class Querys {
     );
     return result;
   }
+
+  getEvents(cidade) async {
+    var db = await DbConnection().getFirestoreInstance();
+    return await db
+        .collection('/$cidade')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+      return data;
+    });
+  }
 }

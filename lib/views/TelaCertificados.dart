@@ -1,14 +1,11 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:eventos_uesb/widgets/DoubleCardGrid.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class TelaCertificados extends StatelessWidget {
-  TelaCertificados({super.key});
-
-  DoubleCardGrid cardGrid = const DoubleCardGrid(botaoNome: 'Certificado');
+  const TelaCertificados({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,6 @@ class TelaCertificados extends StatelessWidget {
             'lib/assets/images/uesb-logo.png',
             scale: 3,
           ),
-          cardGrid
         ],
       ),
     ));
