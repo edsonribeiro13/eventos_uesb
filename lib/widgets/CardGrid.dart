@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:eventos_uesb/widgets/DefaultTextButton.dart';
+import 'package:eventos_uesb/domain/Events.dart';
 
 class CardGrid extends StatelessWidget {
   const CardGrid({super.key});
@@ -28,7 +29,10 @@ class CardGrid extends StatelessWidget {
             children: [
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    onTap: () async => {
+                          await Events.getAllEvents('itapetinga'),
+                          Navigator.pushNamed(context, '/events')
+                        },
                     child: Container(
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
@@ -46,14 +50,20 @@ class CardGrid extends StatelessWidget {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
-                  onPressed: () => Navigator.pushNamed(context, '/events'),
+                  onPressed: () async => {
+                    await Events.getAllEvents('itapetinga'),
+                    Navigator.pushNamed(context, '/events')
+                  },
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Itapetinga"),
                 )
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    onTap: () async => {
+                          await Events.getAllEvents('jequie'),
+                          Navigator.pushNamed(context, '/events')
+                        },
                     child: Container(
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
@@ -70,14 +80,20 @@ class CardGrid extends StatelessWidget {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
-                  onPressed: () => Navigator.pushNamed(context, '/events'),
+                  onPressed: () async => {
+                    await Events.getAllEvents('itapetinga'),
+                    Navigator.pushNamed(context, '/events')
+                  },
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Jequié"),
                 )
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/events'),
+                    onTap: () async => {
+                          await Events.getAllEvents('coquista'),
+                          Navigator.pushNamed(context, '/events')
+                        },
                     child: Container(
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
@@ -94,7 +110,10 @@ class CardGrid extends StatelessWidget {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
-                  onPressed: () => Navigator.pushNamed(context, '/events'),
+                  onPressed: () async => {
+                    await Events.getAllEvents('itapetinga'),
+                    Navigator.pushNamed(context, '/events')
+                  },
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Conquista"),
                 )

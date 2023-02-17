@@ -1,24 +1,26 @@
 // ignore_for_file: file_names
 
+import 'package:flutter/material.dart';
 import 'package:localstore/localstore.dart';
 
 class UserStore {
   getInstance() {
+    WidgetsFlutterBinding.ensureInitialized();
     return Localstore.instance;
   }
 
-  getUser() {
+  getUser() async {
     var db = getInstance();
-    return db.collection('users').get();
+    return await db.collection('users').get();
   }
 
-  addUser(idUser) {
+  addUser(idUser) async {
     var db = getInstance();
-    var id = db.collection('users').doc().id;
-    return db.collection('user').doc(id).set({'idUser': idUser});
+    db.collection('users').doc('1').set({'idUser': idUser});
   }
 
-  deleteUser() {
-    var items = getUser();
+  deleteUser() async {
+    var db = getInstance();
+    await db.collection('users').doc('1').delete();
   }
 }
