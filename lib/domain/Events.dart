@@ -7,6 +7,7 @@ class Events {
   static String filterClause = '';
   static String cidade = '';
   static String filter = '';
+  static List eventDetailed = [];
 
   static getAllEvents(eventName) async {
     Querys query = Querys();
@@ -16,7 +17,7 @@ class Events {
     Events.manipulateEventObject(events);
   }
 
-  static getFilterClause(filter) {
+  static setFilterClause(filter) {
     filterClause = filter;
   }
 
@@ -38,5 +39,13 @@ class Events {
       var eventToString = events[i].toString();
       eventSplited.add(eventToString.split(','));
     }
+  }
+
+  static setEventDetailed(event) {
+    eventDetailed = event;
+  }
+
+  static getEventDetailed() {
+    return eventDetailed;
   }
 }
