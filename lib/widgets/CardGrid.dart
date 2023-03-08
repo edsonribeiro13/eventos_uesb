@@ -81,7 +81,7 @@ class CardGrid extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
                   onPressed: () async => {
-                    await Events.getAllEvents('itapetinga'),
+                    await Events.getAllEvents('jequie'),
                     Navigator.pushNamed(context, '/events')
                   },
                   icon: const Icon(Icons.smart_button_rounded),
@@ -91,7 +91,7 @@ class CardGrid extends StatelessWidget {
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
                     onTap: () async => {
-                          await Events.getAllEvents('coquista'),
+                          await Events.getAllEvents('conquista'),
                           Navigator.pushNamed(context, '/events')
                         },
                     child: Container(
@@ -111,7 +111,7 @@ class CardGrid extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
                   onPressed: () async => {
-                    await Events.getAllEvents('itapetinga'),
+                    await Events.getAllEvents('conquista'),
                     Navigator.pushNamed(context, '/events')
                   },
                   icon: const Icon(Icons.smart_button_rounded),
