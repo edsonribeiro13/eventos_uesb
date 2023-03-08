@@ -25,7 +25,7 @@ class DropdownMenu extends State<DropdownButtonState> {
       onChanged: (String? value) {
         // This is called when the user selects an item.
         setState(() {
-          Events.getFilterClause(value);
+          Events.setFilterClause(value);
           dropdownValue = value!;
         });
       },
