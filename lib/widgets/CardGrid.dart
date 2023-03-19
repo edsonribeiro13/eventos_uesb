@@ -24,7 +24,7 @@ class CardGrid extends StatelessWidget {
             shrinkWrap: true,
             childAspectRatio: 1.3,
             padding: EdgeInsets.symmetric(
-                vertical: mediaQuery.size.height / 100,
+                vertical: mediaQuery.size.height / 10,
                 horizontal: mediaQuery.size.width / 5),
             children: [
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -36,7 +36,7 @@ class CardGrid extends StatelessWidget {
                     child: Container(
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
-                          color: basicCss.basicColorSmother,
+                          color: basicCss.basicColor,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: IconButton(
@@ -48,8 +48,8 @@ class CardGrid extends StatelessWidget {
                         ))),
                 ElevatedButton.icon(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          basicCss.basicColorSmother)),
+                      backgroundColor:
+                          MaterialStateProperty.all(basicCss.basicColor)),
                   onPressed: () async => {
                     await Events.getAllEvents('itapetinga'),
                     Navigator.pushNamed(context, '/events')
@@ -67,7 +67,7 @@ class CardGrid extends StatelessWidget {
                     child: Container(
                         padding: EdgeInsets.zero,
                         decoration: BoxDecoration(
-                            color: basicCss.basicColorSmother,
+                            color: basicCss.basicColor,
                             borderRadius: BorderRadius.circular(25)),
                         child: IconButton(
                           padding: EdgeInsets.zero,

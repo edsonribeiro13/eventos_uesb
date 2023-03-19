@@ -12,6 +12,7 @@ class TelaEventoDetalhado extends StatelessWidget {
   Widget build(BuildContext context) {
     BasicCss basicCss = BasicCss();
     var event = Events.getEventDetailed();
+    MediaQueryData mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
         floatingActionButton: ElevatedButton.icon(
@@ -24,7 +25,8 @@ class TelaEventoDetalhado extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         body: Center(
           child: Container(
-            padding: const EdgeInsets.only(top: 70),
+            padding: EdgeInsets.symmetric(
+                vertical: mediaQuery.size.height / 8, horizontal: 0),
             decoration: basicCss.iniatilzeDefaultBackground(),
             child: Column(
               children: [
@@ -32,56 +34,49 @@ class TelaEventoDetalhado extends StatelessWidget {
                     child: ListTile(
                         leading: const Icon(Icons.title),
                         title: Text(
-                          event[3],
+                          event['nome'],
                           style: const TextStyle(fontSize: 25),
                         ))),
                 Card(
                     child: ListTile(
                         leading: const Icon(Icons.timelapse),
                         title: Text(
-                          event[0].replaceAll('{', ''),
+                          event['horario'],
                           style: const TextStyle(fontSize: 25),
                         ))),
                 Card(
                     child: ListTile(
                         leading: const Icon(Icons.date_range),
                         title: Text(
-                          event[1],
+                          event['data'],
                           style: const TextStyle(fontSize: 25),
                         ))),
                 Card(
                     child: ListTile(
                         leading: const Icon(Icons.biotech),
                         title: Text(
-                          event[2],
-                          style: const TextStyle(fontSize: 25),
-                        ))),
-                Card(
-                    child: ListTile(
-                        leading: const Icon(Icons.public),
-                        title: Text(
-                          event[4],
+                          event['departamento'],
                           style: const TextStyle(fontSize: 25),
                         ))),
                 Card(
                     child: ListTile(
                         leading: const Icon(Icons.people),
                         title: Text(
-                          event[5],
+                          event['limite'],
                           style: const TextStyle(fontSize: 25),
                         ))),
                 Card(
                     child: ListTile(
                         leading: const Icon(Icons.emoji_people),
                         title: Text(
-                          event[6],
+                          event['organizador'],
                           style: const TextStyle(fontSize: 25),
                         ))),
                 Card(
                     child: ListTile(
                         leading: const Icon(Icons.place),
                         title: Text(
-                          event[7].replaceAll('}', ''),
+                          event['local'],
                           style: const TextStyle(fontSize: 25),
                         ))),
               ],

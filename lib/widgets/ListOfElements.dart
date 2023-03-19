@@ -10,7 +10,7 @@ class ListOfElements extends StatelessWidget {
   @override
   build(BuildContext context) {
     BasicCss basicCss = BasicCss();
-    var height = (122 * data.length) * 1.0;
+    var height = (126 * data.length) * 1.0;
     return SizedBox(
         height: height,
         child: ListView.builder(
@@ -31,20 +31,20 @@ class ListOfElements extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(data[index][3],
+                          Text(data[index]['nome'],
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 22)),
-                          Text(data[index][1],
+                          Text(data[index]['local'],
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,
                                   fontFamily: 'courier')),
-                          Text(data[index][0].replaceAll('{', ''),
+                          Text(data[index]['departamento'],
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,
                                   fontFamily: 'courier')),
-                          Text(data[index][2],
+                          Text(data[index]['data'],
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,
