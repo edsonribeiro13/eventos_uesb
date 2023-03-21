@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:eventos_uesb/utils/store/UserStore.dart';
+import 'package:eventos_uesb/views/TelaEventoDetalhado.dart';
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:eventos_uesb/widgets/DefaultTextButton.dart';
@@ -16,22 +18,35 @@ class CardGrid extends StatelessWidget {
       textButton: 'Validar Certificado',
       routeName: '/validate',
     );
+    var userCpf = {};
 
     return Column(
       children: [
         GridView.count(
             crossAxisCount: 1,
             shrinkWrap: true,
-            childAspectRatio: 1.3,
+            childAspectRatio: 1.2,
             padding: EdgeInsets.symmetric(
-                vertical: mediaQuery.size.height / 10,
+                vertical: mediaQuery.size.height / 12,
                 horizontal: mediaQuery.size.width / 5),
             children: [
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
                     onTap: () async => {
-                          await Events.getAllEvents('itapetinga'),
-                          Navigator.pushNamed(context, '/events')
+                          TelaEventoDetalhado.unsetUserPage(),
+                          if (await UserStore().getUser() != null)
+                            {
+                              userCpf = await UserStore().getUser(),
+                              await Events.getAllEventNotSubscribed(
+                                  'itapetinga', userCpf['idUser']),
+                              Navigator.pushNamed(context, '/events')
+                            }
+                          else
+                            {
+                              await Events.getAllEvents('itapetinga'),
+                              TelaEventoDetalhado.unsetUserPage(),
+                              Navigator.pushNamed(context, '/events')
+                            }
                         },
                     child: Container(
                         padding: EdgeInsets.zero,
@@ -41,7 +56,7 @@ class CardGrid extends StatelessWidget {
                         ),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          iconSize: 130,
+                          iconSize: 150,
                           onPressed: null,
                           icon: Image.asset(
                               'lib/assets/images/uesb-campus-itapetinga.jpg'),
@@ -51,8 +66,20 @@ class CardGrid extends StatelessWidget {
                       backgroundColor:
                           MaterialStateProperty.all(basicCss.basicColor)),
                   onPressed: () async => {
-                    await Events.getAllEvents('itapetinga'),
-                    Navigator.pushNamed(context, '/events')
+                    TelaEventoDetalhado.unsetUserPage(),
+                    if (await UserStore().getUser() != null)
+                      {
+                        userCpf = await UserStore().getUser(),
+                        await Events.getAllEventNotSubscribed(
+                            'itapetinga', userCpf['idUser']),
+                        Navigator.pushNamed(context, '/events')
+                      }
+                    else
+                      {
+                        await Events.getAllEvents('itapetinga'),
+                        TelaEventoDetalhado.unsetUserPage(),
+                        Navigator.pushNamed(context, '/events')
+                      }
                   },
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Itapetinga"),
@@ -61,8 +88,20 @@ class CardGrid extends StatelessWidget {
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
                     onTap: () async => {
-                          await Events.getAllEvents('jequie'),
-                          Navigator.pushNamed(context, '/events')
+                          TelaEventoDetalhado.unsetUserPage(),
+                          if (await UserStore().getUser() != null)
+                            {
+                              userCpf = await UserStore().getUser(),
+                              await Events.getAllEventNotSubscribed(
+                                  'jequie', userCpf['idUser']),
+                              Navigator.pushNamed(context, '/events')
+                            }
+                          else
+                            {
+                              await Events.getAllEvents('jequie'),
+                              TelaEventoDetalhado.unsetUserPage(),
+                              Navigator.pushNamed(context, '/events')
+                            }
                         },
                     child: Container(
                         padding: EdgeInsets.zero,
@@ -71,7 +110,7 @@ class CardGrid extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25)),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          iconSize: 130,
+                          iconSize: 150,
                           onPressed: null,
                           icon: Image.asset(
                               'lib/assets/images/campus-jequie.jpeg'),
@@ -81,8 +120,20 @@ class CardGrid extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
                   onPressed: () async => {
-                    await Events.getAllEvents('jequie'),
-                    Navigator.pushNamed(context, '/events')
+                    TelaEventoDetalhado.unsetUserPage(),
+                    if (await UserStore().getUser() != null)
+                      {
+                        userCpf = await UserStore().getUser(),
+                        await Events.getAllEventNotSubscribed(
+                            'jequie', userCpf['idUser']),
+                        Navigator.pushNamed(context, '/events')
+                      }
+                    else
+                      {
+                        await Events.getAllEvents('jequie'),
+                        TelaEventoDetalhado.unsetUserPage(),
+                        Navigator.pushNamed(context, '/events')
+                      }
                   },
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Jequié"),
@@ -91,8 +142,20 @@ class CardGrid extends StatelessWidget {
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 GestureDetector(
                     onTap: () async => {
-                          await Events.getAllEvents('conquista'),
-                          Navigator.pushNamed(context, '/events')
+                          TelaEventoDetalhado.unsetUserPage(),
+                          if (await UserStore().getUser() != null)
+                            {
+                              userCpf = await UserStore().getUser(),
+                              await Events.getAllEventNotSubscribed(
+                                  'conquista', userCpf['idUser']),
+                              Navigator.pushNamed(context, '/events')
+                            }
+                          else
+                            {
+                              await Events.getAllEvents('conquista'),
+                              TelaEventoDetalhado.unsetUserPage(),
+                              Navigator.pushNamed(context, '/events')
+                            }
                         },
                     child: Container(
                         padding: EdgeInsets.zero,
@@ -101,7 +164,7 @@ class CardGrid extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25)),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          iconSize: 130,
+                          iconSize: 150,
                           onPressed: null,
                           icon: Image.asset(
                               'lib/assets/images/uesb-conquista.jpg'),
@@ -111,8 +174,20 @@ class CardGrid extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(
                           basicCss.basicColorSmother)),
                   onPressed: () async => {
-                    await Events.getAllEvents('conquista'),
-                    Navigator.pushNamed(context, '/events')
+                    TelaEventoDetalhado.unsetUserPage(),
+                    if (await UserStore().getUser() != null)
+                      {
+                        userCpf = await UserStore().getUser(),
+                        await Events.getAllEventNotSubscribed(
+                            'conquista', userCpf['idUser']),
+                        Navigator.pushNamed(context, '/events')
+                      }
+                    else
+                      {
+                        await Events.getAllEvents('conquista'),
+                        TelaEventoDetalhado.unsetUserPage(),
+                        Navigator.pushNamed(context, '/events')
+                      }
                   },
                   icon: const Icon(Icons.smart_button_rounded),
                   label: const Text("Eventos Conquista"),

@@ -15,6 +15,16 @@ class Events {
     events = await query.getEvents(eventName);
   }
 
+  static getAllEventNotSubscribed(eventName, cpf) async {
+    Querys query = Querys();
+    cidade = eventName;
+
+    events = await query.getEventsUnsubscribed(eventName, cpf);
+    if (events.isEmpty) {
+      events = await query.getEvents(eventName);
+    }
+  }
+
   static setFilterClause(filter) {
     filterClause = filter.toLowerCase();
   }
@@ -30,10 +40,6 @@ class Events {
   static filterEvent() async {
     Querys query = Querys();
 
-    print(cidade);
-    print(filterClause);
-    print(filter);
-
     events = await query.filterEvent(cidade, filterClause, filter);
   }
 
@@ -45,11 +51,22 @@ class Events {
       'departamento': event['departamento'],
       'limite': event['limite'],
       'organizador': event['organizador'],
-      'local': event['local']
+      'local': event['local'],
+      'id': event['id']
     };
   }
 
   static getEventDetailed() {
     return eventDetailed;
+  }
+
+  static subscribeToEvent(idEvent, cpf) async {
+    Querys querys = Querys();
+    await querys.subscribeEvent(idEvent, cpf, Events.cidade);
+  }
+
+  static retrieveUserEvents(cpf) async {
+    Querys querys = Querys();
+    events = await querys.retrieveUserEvents(cpf);
   }
 }
