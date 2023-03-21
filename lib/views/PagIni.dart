@@ -16,15 +16,16 @@ class pagIni extends StatelessWidget {
   Widget build(BuildContext context) {
     BasicCss basicCss = BasicCss();
     return Scaffold(
-        bottomNavigationBar: Row(children: [navigationMenu]),
-        floatingActionButton: const IconButton(
-            icon: Icon(Icons.notifications), onPressed: null, iconSize: 35),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        body: Center(
-            child: Container(
-          padding: EdgeInsets.zero,
-          decoration: basicCss.iniatilzeDefaultBackground(),
-          child: cardGrid,
-        )));
+      floatingActionButton: const IconButton(
+          icon: Icon(Icons.notifications), onPressed: null, iconSize: 35),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      body: Center(
+          child: Container(
+        padding: EdgeInsets.zero,
+        decoration: basicCss.iniatilzeDefaultBackground(),
+        child: cardGrid,
+      )),
+      bottomNavigationBar: Row(children: [navigationMenu]),
+    );
   }
 }

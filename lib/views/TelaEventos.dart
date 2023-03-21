@@ -12,8 +12,9 @@ class TelaEventos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var listOfElements = ListOfElements(data: Events.eventSplited);
+    var listOfElements = ListOfElements(data: Events.events);
     BasicCss basicCss = BasicCss();
+    MediaQueryData mediaQuery = MediaQuery.of(context);
     return Scaffold(
         bottomNavigationBar: const NavigationMenu(),
         floatingActionButton: IconButton(
@@ -23,6 +24,8 @@ class TelaEventos extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Container(
+          padding: EdgeInsets.symmetric(
+              vertical: mediaQuery.size.height / 12, horizontal: 0),
           decoration: basicCss.iniatilzeDefaultBackground(),
           child: Column(
             children: [

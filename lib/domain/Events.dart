@@ -3,25 +3,37 @@ import 'package:eventos_uesb/utils/repository/Querys.dart';
 
 class Events {
   static List<Object?> events = [{}];
-  static List eventSplited = [];
   static String filterClause = '';
   static String cidade = '';
-  static String filter = '';
-  static List eventDetailed = [];
+  static String filter = 'data';
+  static Object eventDetailed = {};
 
   static getAllEvents(eventName) async {
     Querys query = Querys();
     cidade = eventName;
 
     events = await query.getEvents(eventName);
-    Events.manipulateEventObject(events);
+  }
+
+  static getAllEventNotSubscribed(eventName, cpf) async {
+    Querys query = Querys();
+    cidade = eventName;
+
+    events = await query.getEventsUnsubscribed(eventName, cpf);
+    if (events.isEmpty) {
+      events = await query.getEvents(eventName);
+    }
   }
 
   static setFilterClause(filter) {
-    filterClause = filter;
+    filterClause = filter.toLowerCase();
   }
 
-  static getFilterValue(filterValue) {
+  static getFilterClause() {
+    return filterClause;
+  }
+
+  static setFilterValue(filterValue) {
     filter = filterValue;
   }
 
@@ -29,23 +41,32 @@ class Events {
     Querys query = Querys();
 
     events = await query.filterEvent(cidade, filterClause, filter);
-    Events.manipulateEventObject(events);
-  }
-
-  static manipulateEventObject(events) {
-    eventSplited = [];
-
-    for (var i = 0; i < events.length; i++) {
-      var eventToString = events[i].toString();
-      eventSplited.add(eventToString.split(','));
-    }
   }
 
   static setEventDetailed(event) {
-    eventDetailed = event;
+    eventDetailed = {
+      'nome': event['nome'],
+      'horario': event['horario'],
+      'data': event['data'],
+      'departamento': event['departamento'],
+      'limite': event['limite'],
+      'organizador': event['organizador'],
+      'local': event['local'],
+      'id': event['id']
+    };
   }
 
   static getEventDetailed() {
     return eventDetailed;
+  }
+
+  static subscribeToEvent(idEvent, cpf) async {
+    Querys querys = Querys();
+    await querys.subscribeEvent(idEvent, cpf, Events.cidade);
+  }
+
+  static retrieveUserEvents(cpf) async {
+    Querys querys = Querys();
+    events = await querys.retrieveUserEvents(cpf);
   }
 }

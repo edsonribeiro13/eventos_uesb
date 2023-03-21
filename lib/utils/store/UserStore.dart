@@ -11,7 +11,7 @@ class UserStore {
 
   getUser() async {
     var db = getInstance();
-    return await db.collection('users').get();
+    return await db.collection('users').doc('1').get();
   }
 
   addUser(idUser) async {

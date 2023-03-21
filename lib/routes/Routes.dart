@@ -12,7 +12,7 @@ import 'package:eventos_uesb/views/TelaValidarRecuperarSenha.dart';
 import 'package:eventos_uesb/views/TelaEventos.dart';
 import 'package:eventos_uesb/views/TelaAvaliarEvento.dart';
 import 'package:eventos_uesb/views/TelaFiltro.dart';
-import 'package:eventos_uesb/views/TelaEventoDetalhado.dart';
+import 'package:eventos_uesb/controller/ControllerTelaEventoDetalhado.dart';
 
 class Routes {
   createRouteTable() {
@@ -28,7 +28,7 @@ class Routes {
       '/events': (context) => const TelaEventos(),
       '/rateEvent': (context) => const TelaAvaliarEvento(),
       '/filtrar': (context) => const TelaFiltro(),
-      '/eventDetails': (context) => const TelaEventoDetalhado()
+      '/eventDetails': (context) => const TelaEventoDetalhadoState()
     });
   }
 }

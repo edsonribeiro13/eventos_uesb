@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:eventos_uesb/controller/ControllerDropDown.dart';
 import 'package:eventos_uesb/controller/ControllerCampoFiltro.dart';
-import 'package:eventos_uesb/domain/Events.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class TelaFiltro extends StatelessWidget {
@@ -15,8 +14,11 @@ class TelaFiltro extends StatelessWidget {
     BasicCss basicCss = BasicCss();
     DropdownButtonState dropdownMenu = const DropdownButtonState();
     ControllerCampoFiltro controllerCampoFiltro = const ControllerCampoFiltro();
+    MediaQueryData mediaQuery = MediaQuery.of(context);
     return Scaffold(
         body: Container(
+      padding: EdgeInsets.symmetric(
+          vertical: mediaQuery.size.height / 12, horizontal: 0),
       decoration: basicCss.iniatilzeDefaultBackground(),
       child: Column(
         children: [
@@ -24,22 +26,11 @@ class TelaFiltro extends StatelessWidget {
             'lib/assets/images/uesb-logo.png',
             scale: 3,
           ),
-          const Text('Escolha um elemento para filtrar',
+          const Text('Filtrar por',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
           dropdownMenu,
           controllerCampoFiltro,
-          TextButton(
-              onPressed: () async => {
-                    await Events.filterEvent(),
-                    Navigator.pushNamed(context, '/events')
-                  },
-              style: TextButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: basicCss.basicColorSmother,
-                  textStyle: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold)),
-              child: const Text('Filtrar'))
         ],
       ),
     ));
