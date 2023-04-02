@@ -3,9 +3,9 @@ import 'package:eventos_uesb/utils/repository/Querys.dart';
 
 class Events {
   static List<Object?> events = [{}];
-  static String filterClause = '';
+  static String filterClause = 'data';
   static String cidade = '';
-  static String filter = 'data';
+  static String filter = '';
   static Object eventDetailed = {};
 
   static getAllEvents(eventName) async {
@@ -20,9 +20,6 @@ class Events {
     cidade = eventName;
 
     events = await query.getEventsUnsubscribed(eventName, cpf);
-    if (events.isEmpty) {
-      events = await query.getEvents(eventName);
-    }
   }
 
   static setFilterClause(filter) {
@@ -34,7 +31,7 @@ class Events {
   }
 
   static setFilterValue(filterValue) {
-    filter = filterValue;
+    filter = filterValue.toUpperCase();
   }
 
   static filterEvent() async {

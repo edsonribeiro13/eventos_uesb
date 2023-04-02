@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventos_uesb/utils/repository/DbConnection.dart';
-import 'package:eventos_uesb/widgets/DropdownMenu.dart';
 
 class Querys {
   createNewUser(nome, CPF, senha) async {
@@ -91,14 +90,23 @@ class Querys {
   }
 
   subscribeEvent(idEvent, cpf, cidade) async {
-    final subscribe = {'idEvento': idEvent};
+    final subscribe = {'$idEvent': idEvent};
     var db = await DbConnection().getFirestoreInstance();
-    db
-        .collection('/meusEventos')
-        .doc(cpf)
-        .collection('/cidade')
-        .doc('/$cidade')
-        .set(subscribe);
+    try {
+      await db
+          .collection('/meusEventos')
+          .doc(cpf)
+          .collection('/cidade')
+          .doc('/$cidade')
+          .update(subscribe);
+    } catch (e) {
+      db
+          .collection('/meusEventos')
+          .doc(cpf)
+          .collection('/cidade')
+          .doc('/$cidade')
+          .set(subscribe);
+    }
   }
 
   retrieveUserEvents(cpf) async {
