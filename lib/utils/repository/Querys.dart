@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, file_names
+// ignore_for_file: non_constant_identifier_names, file_names, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventos_uesb/utils/repository/DbConnection.dart';
@@ -210,5 +210,24 @@ class Querys {
     }
 
     return eventsPerUser;
+  }
+
+  retrieveUserIsAdmin(cpf) async {
+    var db = await DbConnection().getFirestoreInstance();
+    var docRef = await db.collection('/login').where('cpf', isEqualTo: cpf);
+    final result = await docRef.get().then(
+      (QuerySnapshot querySnapshot) {
+        final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+        return data;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+    return result[0]['isAdmin'];
+  }
+
+  insertNewEvent(eventInserted, cidade, title) async {
+    var db = await DbConnection().getFirestoreInstance();
+
+    db.collection('$cidade').doc('$title').set(eventInserted);
   }
 }
