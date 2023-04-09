@@ -1,12 +1,14 @@
 // ignore_for_file: camel_case_types, file_names
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventos_uesb/utils/repository/Querys.dart';
 
 class Events {
   static List<Object?> events = [{}];
-  static String filterClause = '';
+  static String filterClause = 'data';
   static String cidade = '';
-  static String filter = 'data';
+  static String filter = '';
   static Object eventDetailed = {};
+  static bool userIsAdmin = false;
 
   static getAllEvents(eventName) async {
     Querys query = Querys();
@@ -20,9 +22,6 @@ class Events {
     cidade = eventName;
 
     events = await query.getEventsUnsubscribed(eventName, cpf);
-    if (events.isEmpty) {
-      events = await query.getEvents(eventName);
-    }
   }
 
   static setFilterClause(filter) {
@@ -34,7 +33,7 @@ class Events {
   }
 
   static setFilterValue(filterValue) {
-    filter = filterValue;
+    filter = filterValue.toUpperCase();
   }
 
   static filterEvent() async {
@@ -68,5 +67,26 @@ class Events {
   static retrieveUserEvents(cpf) async {
     Querys querys = Querys();
     events = await querys.retrieveUserEvents(cpf);
+  }
+
+  static retrieveUserIsAdmin(cpf) async {
+    Querys querys = Querys();
+    userIsAdmin = await querys.retrieveUserIsAdmin(cpf);
+  }
+
+  static insertNewEvent(eventInserted) async {
+    var eventToInsert = {
+      'nome': eventInserted[0].text,
+      'data': eventInserted[1].text,
+      'departamento': eventInserted[2].text.toUpperCase(),
+      'horario': eventInserted[3].text,
+      'limite': eventInserted[4].text,
+      'local': eventInserted[5].text,
+      'organizador': eventInserted[6].text,
+      'id': Timestamp.now().seconds
+    };
+
+    Querys querys = Querys();
+    querys.insertNewEvent(eventToInsert, cidade, eventToInsert['nome']);
   }
 }

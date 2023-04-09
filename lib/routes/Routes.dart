@@ -13,6 +13,7 @@ import 'package:eventos_uesb/views/TelaEventos.dart';
 import 'package:eventos_uesb/views/TelaAvaliarEvento.dart';
 import 'package:eventos_uesb/views/TelaFiltro.dart';
 import 'package:eventos_uesb/controller/ControllerTelaEventoDetalhado.dart';
+import 'package:eventos_uesb/controller/ControllerTelaCadastroEvento.dart';
 
 class Routes {
   createRouteTable() {
@@ -28,7 +29,8 @@ class Routes {
       '/events': (context) => const TelaEventos(),
       '/rateEvent': (context) => const TelaAvaliarEvento(),
       '/filtrar': (context) => const TelaFiltro(),
-      '/eventDetails': (context) => const TelaEventoDetalhadoState()
+      '/eventDetails': (context) => const TelaEventoDetalhadoState(),
+      '/RegisterEvent': (context) => const ControllerTelaCadastroEvento()
     });
   }
 }

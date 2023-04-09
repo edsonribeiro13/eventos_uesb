@@ -15,14 +15,19 @@ class TelaEventos extends StatelessWidget {
     var listOfElements = ListOfElements(data: Events.events);
     BasicCss basicCss = BasicCss();
     MediaQueryData mediaQuery = MediaQuery.of(context);
+    bool isAdmin = Events.userIsAdmin;
     return Scaffold(
         bottomNavigationBar: const NavigationMenu(),
         floatingActionButton: IconButton(
-          onPressed: () => Navigator.pushNamed(context, '/filtrar'),
-          icon: const Icon(Icons.filter_alt),
-          iconSize: 40,
+          onPressed: () => isAdmin
+              ? Navigator.pushNamed(context, '/RegisterEvent')
+              : Navigator.pushNamed(context, '/filtrar'),
+          icon: isAdmin ? const Icon(Icons.add) : const Icon(Icons.filter_alt),
+          iconSize: isAdmin ? 60 : 40,
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        floatingActionButtonLocation: isAdmin
+            ? FloatingActionButtonLocation.endFloat
+            : FloatingActionButtonLocation.endTop,
         body: Container(
           padding: EdgeInsets.symmetric(
               vertical: mediaQuery.size.height / 12, horizontal: 0),

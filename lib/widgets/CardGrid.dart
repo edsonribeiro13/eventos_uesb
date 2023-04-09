@@ -37,6 +37,8 @@ class CardGrid extends StatelessWidget {
                           if (await UserStore().getUser() != null)
                             {
                               userCpf = await UserStore().getUser(),
+                              await Events.retrieveUserIsAdmin(
+                                  userCpf['idUser']),
                               await Events.getAllEventNotSubscribed(
                                   'itapetinga', userCpf['idUser']),
                               Navigator.pushNamed(context, '/events')
@@ -70,6 +72,7 @@ class CardGrid extends StatelessWidget {
                     if (await UserStore().getUser() != null)
                       {
                         userCpf = await UserStore().getUser(),
+                        await Events.retrieveUserIsAdmin(userCpf['idUser']),
                         await Events.getAllEventNotSubscribed(
                             'itapetinga', userCpf['idUser']),
                         Navigator.pushNamed(context, '/events')
@@ -92,6 +95,8 @@ class CardGrid extends StatelessWidget {
                           if (await UserStore().getUser() != null)
                             {
                               userCpf = await UserStore().getUser(),
+                              await Events.retrieveUserIsAdmin(
+                                  userCpf['idUser']),
                               await Events.getAllEventNotSubscribed(
                                   'jequie', userCpf['idUser']),
                               Navigator.pushNamed(context, '/events')
@@ -124,6 +129,7 @@ class CardGrid extends StatelessWidget {
                     if (await UserStore().getUser() != null)
                       {
                         userCpf = await UserStore().getUser(),
+                        await Events.retrieveUserIsAdmin(userCpf['idUser']),
                         await Events.getAllEventNotSubscribed(
                             'jequie', userCpf['idUser']),
                         Navigator.pushNamed(context, '/events')
@@ -146,6 +152,8 @@ class CardGrid extends StatelessWidget {
                           if (await UserStore().getUser() != null)
                             {
                               userCpf = await UserStore().getUser(),
+                              await Events.retrieveUserIsAdmin(
+                                  userCpf['idUser']),
                               await Events.getAllEventNotSubscribed(
                                   'conquista', userCpf['idUser']),
                               Navigator.pushNamed(context, '/events')
@@ -178,6 +186,7 @@ class CardGrid extends StatelessWidget {
                     if (await UserStore().getUser() != null)
                       {
                         userCpf = await UserStore().getUser(),
+                        await Events.retrieveUserIsAdmin(userCpf['idUser']),
                         await Events.getAllEventNotSubscribed(
                             'conquista', userCpf['idUser']),
                         Navigator.pushNamed(context, '/events')
