@@ -9,6 +9,10 @@ class Events {
   static String filter = '';
   static Object eventDetailed = {};
   static bool userIsAdmin = false;
+  static List collaborators = [];
+  static List manager = [];
+  static String id = '';
+  static bool userIsManager = false;
 
   static getAllEvents(eventName) async {
     Querys query = Querys();
@@ -21,7 +25,11 @@ class Events {
     Querys query = Querys();
     cidade = eventName;
 
-    events = await query.getEventsUnsubscribed(eventName, cpf);
+    try {
+      events = await query.getEventsUnsubscribed(eventName, cpf);
+    } catch (e) {
+      events = await query.getEvents(eventName);
+    }
   }
 
   static setFilterClause(filter) {
@@ -74,6 +82,18 @@ class Events {
     userIsAdmin = await querys.retrieveUserIsAdmin(cpf);
   }
 
+  static retrieveUserIsManager(cpf) async {
+    userIsManager = manager.contains(cpf);
+  }
+
+  static getUserIsAdmin() {
+    return userIsAdmin;
+  }
+
+  static getUserIsMager() {
+    return userIsManager;
+  }
+
   static insertNewEvent(eventInserted) async {
     var eventToInsert = {
       'nome': eventInserted[0].text,
@@ -88,5 +108,54 @@ class Events {
 
     Querys querys = Querys();
     querys.insertNewEvent(eventToInsert, cidade, eventToInsert['nome']);
+  }
+
+  static retrieveCollaborators(idEvent) async {
+    Querys querys = Querys();
+
+    id = '$idEvent';
+    collaborators =
+        await querys.retrieveCollaborators('$idEvent', 'colaboradores');
+  }
+
+  static retrieveManager(idEvent) async {
+    Querys querys = Querys();
+
+    id = '$idEvent';
+    manager = await querys.retrieveCollaborators('$idEvent', 'organizador');
+  }
+
+  static getCollaborators() {
+    return collaborators;
+  }
+
+  static getManager() {
+    return manager;
+  }
+
+  static setNewCollaborator(cpf, typeOfCollaborator) async {
+    if (typeOfCollaborator == 'collaborator') {
+      collaborators.add(cpf);
+    } else {
+      manager.add(cpf);
+    }
+  }
+
+  static insertArrayOfCollaborattors(typeOfCollaborator) {
+    Querys querys = Querys();
+
+    if (typeOfCollaborator == 'collaborator') {
+      querys.insertArrayOfCollaborattors(collaborators, id, 'colaboradores');
+    } else {
+      querys.insertArrayOfCollaborattors(manager, id, 'organizador');
+    }
+  }
+
+  static removeCollaborator(collaborator, typeOfCollaborator) {
+    if (typeOfCollaborator == 'collaborator') {
+      collaborators.removeWhere((element) => element == collaborator);
+    } else {
+      manager.removeWhere((element) => element == collaborator);
+    }
   }
 }
