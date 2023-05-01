@@ -40,28 +40,36 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
     var userCpf = {};
     var userIsAdmin = Events.getUserIsAdmin();
     var userIsManager = Events.getUserIsMager();
+    var userIsCollaborator = Events.getUserIsCollaborator();
 
     return Scaffold(
         floatingActionButton: ElevatedButton.icon(
             icon: userIsAdmin || userIsManager
                 ? const Icon(Icons.group)
-                : const Icon(Icons.arrow_back),
+                : userIsCollaborator
+                    ? const Icon(Icons.edit)
+                    : const Icon(Icons.arrow_back),
             label: userIsAdmin || userIsManager
                 ? const Text('Administrar equipe do evento')
-                : const Text('Voltar'),
+                : userIsCollaborator
+                    ? const Text('Editar evento')
+                    : const Text('Voltar'),
             onPressed: () async => userIsAdmin || userIsManager
                 ? {
                     await Events.retrieveManager(event['id']),
                     await Events.retrieveCollaborators(event['id']),
                     Navigator.pushNamed(context, '/controleOrganização')
                   }
-                : Navigator.pop(context),
+                : userIsCollaborator
+                    ? Navigator.pushNamed(context, '/RegisterEvent')
+                    : Navigator.pop(context),
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all(basicCss.basicColorSmother))),
-        floatingActionButtonLocation: userIsAdmin || userIsManager
-            ? FloatingActionButtonLocation.endFloat
-            : FloatingActionButtonLocation.startTop,
+        floatingActionButtonLocation:
+            userIsAdmin || userIsManager || userIsCollaborator
+                ? FloatingActionButtonLocation.endFloat
+                : FloatingActionButtonLocation.startTop,
         body: Center(
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -120,35 +128,41 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
                         ))),
                 Container(
                     padding: EdgeInsets.only(top: mediaQuery.size.height / 16),
-                    child: ElevatedButton.icon(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(basicCss.basicColor)),
-                        onPressed: () async => {
-                              if (!subscribed)
-                                {
-                                  if (await UserStore().getUser() != null)
+                    child: userIsCollaborator || userIsManager || userIsAdmin
+                        ? ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    basicCss.basicColor)),
+                            onPressed: () async => {
+                                  if (!subscribed)
                                     {
-                                      userCpf = await UserStore().getUser(),
-                                      Events.subscribeToEvent(
-                                          event['id'], userCpf['idUser']),
-                                      setState(() {
-                                        buttonText = 'Inscrito!';
-                                        subscribed = true;
-                                      })
+                                      if (await UserStore().getUser() != null)
+                                        {
+                                          userCpf = await UserStore().getUser(),
+                                          Events.subscribeToEvent(
+                                              event['id'], userCpf['idUser']),
+                                          setState(() {
+                                            buttonText = 'Inscrito!';
+                                            subscribed = true;
+                                          })
+                                        }
+                                      else
+                                        {Navigator.pushNamed(context, '/login')}
                                     }
-                                  else
-                                    {Navigator.pushNamed(context, '/login')}
-                                }
-                            },
-                        icon: const Icon(
-                          Icons.check,
-                          size: 25,
-                        ),
-                        label: Text(
-                          buttonText,
-                          style: const TextStyle(fontSize: 30),
-                        ))),
+                                },
+                            icon: const Icon(
+                              Icons.check,
+                              size: 25,
+                            ),
+                            label: Text(
+                              buttonText,
+                              style: const TextStyle(fontSize: 30),
+                            ))
+                        : Container(
+                            padding: const EdgeInsets.all(10),
+                            color: basicCss.basicColorSmother,
+                            child: const Text('Detalhes do evento',
+                                style: TextStyle(fontSize: 30)))),
               ],
             ),
           ),

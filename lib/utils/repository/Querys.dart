@@ -225,10 +225,15 @@ class Querys {
     return result[0]['isAdmin'];
   }
 
-  insertNewEvent(eventInserted, cidade, title) async {
+  insertNewEvent(eventInserted, cidade, title, method, oldEvent) async {
     var db = await DbConnection().getFirestoreInstance();
 
-    db.collection('$cidade').doc('$title').set(eventInserted);
+    if (method == 'update') {
+      await db.collection('$cidade').doc('$oldEvent').delete();
+      db.collection('$cidade').doc('$title').set(eventInserted);
+    } else {
+      db.collection('$cidade').doc('$title').set(eventInserted);
+    }
   }
 
   retrieveCollaborators(idEvent, colec) async {

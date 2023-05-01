@@ -10,7 +10,7 @@ class ControllerTelaCadastroEvento extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => TelaCadastroEvento();
 
-  cadastroController(textFieldController) async {
+  cadastroController(textFieldController, method, oldEvent) async {
     if (textFieldController[0].text.isNotEmpty &&
         textFieldController[1].text.isNotEmpty &&
         textFieldController[2].text.isNotEmpty &&
@@ -25,7 +25,7 @@ class ControllerTelaCadastroEvento extends StatefulWidget {
         }
       }
 
-      Events.insertNewEvent(textFieldController);
+      Events.insertNewEvent(textFieldController, method, oldEvent);
 
       return [true, ''];
     }

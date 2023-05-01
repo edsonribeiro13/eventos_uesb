@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:eventos_uesb/domain/Events.dart';
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:eventos_uesb/controller/ControllerTelaCadastroEvento.dart';
@@ -18,10 +19,23 @@ class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
   static var maskFormatterTime = MaskTextInputFormatter(
     mask: '##:##',
   );
+  var userIsCollaborator = Events.getUserIsCollaborator();
+  var event = Events.getEventDetailed();
+  var oldEvent = '';
 
   @override
   void initState() {
     cadastroErro = false;
+    if (userIsCollaborator) {
+      textFieldController[0].text = event['nome'];
+      textFieldController[1].text = event['data'];
+      textFieldController[2].text = event['departamento'];
+      textFieldController[3].text = event['horario'];
+      textFieldController[4].text = event['limite'];
+      textFieldController[5].text = event['local'];
+      textFieldController[6].text = event['organizador'];
+    }
+    oldEvent = event['nome'];
     super.initState();
   }
 
@@ -139,8 +153,11 @@ class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
                       padding: const EdgeInsets.only(right: 5.0),
                       child: TextButton(
                           onPressed: (() async {
-                            var result = await controllerTelaCadastro
-                                .cadastroController(textFieldController);
+                            var result =
+                                await controllerTelaCadastro.cadastroController(
+                                    textFieldController,
+                                    userIsCollaborator ? 'update' : 'set',
+                                    oldEvent);
                             if (result[0] == false) {
                               cadastroErroMensagem = result[1];
                               setState(() {

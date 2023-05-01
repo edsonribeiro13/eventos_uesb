@@ -28,8 +28,10 @@ class ListOfElements extends StatelessWidget {
                 child: GestureDetector(
                     onTap: () async => {
                           await Events.retrieveManager(data[index]['id']),
+                          await Events.retrieveCollaborators(data[index]['id']),
                           userCpf = await UserStore().getUser(),
                           Events.retrieveUserIsManager(userCpf['idUser']),
+                          Events.retrieveUserIsCollaborator(userCpf['idUser']),
                           Events.setEventDetailed(data[index]),
                           Navigator.pushNamed(context, '/eventDetails')
                         },
