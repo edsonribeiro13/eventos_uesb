@@ -230,4 +230,41 @@ class Querys {
 
     db.collection('$cidade').doc('$title').set(eventInserted);
   }
+
+  retrieveCollaborators(idEvent, colec) async {
+    var db = await DbConnection().getFirestoreInstance();
+    var collaboratorsResult;
+    var collaborators = [];
+
+    try {
+      collaboratorsResult = await db
+          .collection(colec)
+          .doc(idEvent)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        return documentSnapshot.data();
+      });
+
+      if (collaboratorsResult != null && collaboratorsResult.isNotEmpty) {
+        for (var collab in collaboratorsResult.values) {
+          collaborators = collab;
+        }
+      }
+    } catch (e) {
+      print(e);
+      collaborators = [];
+    }
+
+    return collaborators;
+  }
+
+  insertArrayOfCollaborattors(collaborators, idEvent, colec) async {
+    var db = await DbConnection().getFirestoreInstance();
+
+    try {
+      await db.collection(colec).doc(idEvent).update({'cpf': collaborators});
+    } catch (e) {
+      await db.collection(colec).doc(idEvent).set({'cpf': collaborators});
+    }
+  }
 }

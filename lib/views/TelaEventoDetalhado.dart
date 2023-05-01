@@ -1,7 +1,5 @@
 // ignore_for_file: file_names
 
-import 'dart:ffi';
-
 import 'package:eventos_uesb/domain/Events.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:flutter/material.dart';
@@ -40,16 +38,30 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
     var event = Events.getEventDetailed();
     MediaQueryData mediaQuery = MediaQuery.of(context);
     var userCpf = {};
+    var userIsAdmin = Events.getUserIsAdmin();
+    var userIsManager = Events.getUserIsMager();
 
     return Scaffold(
         floatingActionButton: ElevatedButton.icon(
-            icon: const Icon(Icons.arrow_back),
-            label: const Text('Voltar'),
-            onPressed: () => Navigator.pop(context),
+            icon: userIsAdmin || userIsManager
+                ? const Icon(Icons.group)
+                : const Icon(Icons.arrow_back),
+            label: userIsAdmin || userIsManager
+                ? const Text('Administrar equipe do evento')
+                : const Text('Voltar'),
+            onPressed: () async => userIsAdmin || userIsManager
+                ? {
+                    await Events.retrieveManager(event['id']),
+                    await Events.retrieveCollaborators(event['id']),
+                    Navigator.pushNamed(context, '/controleOrganização')
+                  }
+                : Navigator.pop(context),
             style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all(basicCss.basicColorSmother))),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+        floatingActionButtonLocation: userIsAdmin || userIsManager
+            ? FloatingActionButtonLocation.endFloat
+            : FloatingActionButtonLocation.startTop,
         body: Center(
           child: Container(
             padding: EdgeInsets.symmetric(

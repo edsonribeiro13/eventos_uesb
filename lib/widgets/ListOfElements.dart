@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:eventos_uesb/domain/Events.dart';
+import 'package:eventos_uesb/utils/store/UserStore.dart';
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 
@@ -11,6 +12,7 @@ class ListOfElements extends StatelessWidget {
   build(BuildContext context) {
     BasicCss basicCss = BasicCss();
     var height = (126 * data.length) * 1.0;
+    var userCpf;
     return SizedBox(
         height: height,
         child: ListView.builder(
@@ -24,7 +26,10 @@ class ListOfElements extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30)),
                 color: basicCss.basicColorSmother,
                 child: GestureDetector(
-                    onTap: () => {
+                    onTap: () async => {
+                          await Events.retrieveManager(data[index]['id']),
+                          userCpf = await UserStore().getUser(),
+                          Events.retrieveUserIsManager(userCpf['idUser']),
                           Events.setEventDetailed(data[index]),
                           Navigator.pushNamed(context, '/eventDetails')
                         },
