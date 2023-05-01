@@ -13,6 +13,7 @@ class Events {
   static List manager = [];
   static String id = '';
   static bool userIsManager = false;
+  static bool userIsCollaborator = false;
 
   static getAllEvents(eventName) async {
     Querys query = Querys();
@@ -86,6 +87,10 @@ class Events {
     userIsManager = manager.contains(cpf);
   }
 
+  static retrieveUserIsCollaborator(cpf) async {
+    userIsCollaborator = collaborators.contains(cpf);
+  }
+
   static getUserIsAdmin() {
     return userIsAdmin;
   }
@@ -94,7 +99,11 @@ class Events {
     return userIsManager;
   }
 
-  static insertNewEvent(eventInserted) async {
+  static getUserIsCollaborator() {
+    return userIsCollaborator;
+  }
+
+  static insertNewEvent(eventInserted, method, oldEvent) async {
     var eventToInsert = {
       'nome': eventInserted[0].text,
       'data': eventInserted[1].text,
@@ -107,7 +116,8 @@ class Events {
     };
 
     Querys querys = Querys();
-    querys.insertNewEvent(eventToInsert, cidade, eventToInsert['nome']);
+    querys.insertNewEvent(
+        eventToInsert, cidade, eventToInsert['nome'], method, oldEvent);
   }
 
   static retrieveCollaborators(idEvent) async {
