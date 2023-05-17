@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:eventos_uesb/controller/ControllerTelaCadastroEvento.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:eventos_uesb/controller/ControllerDropDown.dart';
 
 class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
   var textFieldController = List<TextEditingController>.generate(
@@ -22,6 +23,7 @@ class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
   var userIsCollaborator = Events.getUserIsCollaborator();
   var event = Events.getEventDetailed();
   var oldEvent = '';
+  DropdownButtonState dropdownMenu = const DropdownButtonState();
 
   @override
   void initState() {
@@ -35,7 +37,6 @@ class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
       textFieldController[5].text = event['local'];
       textFieldController[6].text = event['organizador'];
     }
-    oldEvent = event['nome'];
     super.initState();
   }
 
@@ -44,9 +45,20 @@ class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
     BasicCss basicCss = BasicCss();
 
     return Scaffold(
+      floatingActionButton: ElevatedButton.icon(
+        onPressed: () async => userIsCollaborator
+            ? {
+                await Events.retrieveUsersToHomologate(event['id']),
+                Navigator.pushNamed(context, '/homologateUser')
+              }
+            : {},
+        icon: const Icon(Icons.list_alt_sharp),
+        label: const Text('Homologar participantes'),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       body: Center(
         child: Container(
-            padding: const EdgeInsets.only(top: 30),
+            padding: const EdgeInsets.only(top: 20),
             decoration: basicCss.iniatilzeDefaultBackground(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -148,6 +160,11 @@ class TelaCadastroEvento extends State<ControllerTelaCadastroEvento> {
                         ))
                       ]))),
                 ),
+                const Text('Número limite de pessoas?',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                dropdownMenu,
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Container(
                       padding: const EdgeInsets.only(right: 5.0),

@@ -9,7 +9,9 @@ import 'package:eventos_uesb/controller/ControllerTelaEventoDetalhado.dart';
 
 class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
   String buttonText = 'Inscreva-se no evento';
+  var event = Events.getEventDetailed();
   bool subscribed = false;
+  var isHomologated = false;
   static bool userPage = false;
 
   static void setUserPage() {
@@ -23,19 +25,36 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
   @override
   void initState() {
     if (TelaEventoDetalhado.userPage) {
-      buttonText = 'Inscrito!';
+      buttonText = event['verifyLimite']
+          ? isHomologated
+              ? 'Inscrito!'
+              : 'Aguardando validação'
+          : 'Inscrito!';
       subscribed = true;
     } else {
       buttonText = 'Inscreva-se no evento';
       subscribed = false;
     }
+    setIsHomologated();
     super.initState();
+  }
+
+  setIsHomologated() async {
+    if (event['verifyLimit'] != null && event['verifyLimit']) {
+      isHomologated = await Events.userIsHomologated(event['id']);
+      setState(() {
+        buttonText = event['verifyLimite']
+            ? isHomologated
+                ? 'Inscrito!'
+                : 'Aguardando validação'
+            : 'Inscrito!';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     BasicCss basicCss = BasicCss();
-    var event = Events.getEventDetailed();
     MediaQueryData mediaQuery = MediaQuery.of(context);
     var userCpf = {};
     var userIsAdmin = Events.getUserIsAdmin();
@@ -61,7 +80,10 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
                     Navigator.pushNamed(context, '/controleOrganização')
                   }
                 : userIsCollaborator
-                    ? Navigator.pushNamed(context, '/RegisterEvent')
+                    ? {
+                        Events.setTelaCriarEvento(),
+                        Navigator.pushNamed(context, '/RegisterEvent')
+                      }
                     : Navigator.pop(context),
             style: ButtonStyle(
                 backgroundColor:
@@ -128,7 +150,7 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
                         ))),
                 Container(
                     padding: EdgeInsets.only(top: mediaQuery.size.height / 16),
-                    child: userIsCollaborator || userIsManager || userIsAdmin
+                    child: !userIsCollaborator && !userIsManager && !userIsAdmin
                         ? ElevatedButton.icon(
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
@@ -140,9 +162,21 @@ class TelaEventoDetalhado extends State<TelaEventoDetalhadoState> {
                                         {
                                           userCpf = await UserStore().getUser(),
                                           Events.subscribeToEvent(
-                                              event['id'], userCpf['idUser']),
+                                              event['id'],
+                                              userCpf['idUser'],
+                                              event['verifyLimite']),
+                                          if (event['verifyLimite'])
+                                            {
+                                              isHomologated = await Events
+                                                  .userIsHomologated(
+                                                      event['id'])
+                                            },
                                           setState(() {
-                                            buttonText = 'Inscrito!';
+                                            buttonText = event['verifyLimite']
+                                                ? isHomologated
+                                                    ? 'Inscrito!'
+                                                    : 'Aguardando validação'
+                                                : 'Inscrito!';
                                             subscribed = true;
                                           })
                                         }

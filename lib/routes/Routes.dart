@@ -14,6 +14,7 @@ import 'package:eventos_uesb/views/TelaFiltro.dart';
 import 'package:eventos_uesb/controller/ControllerTelaEventoDetalhado.dart';
 import 'package:eventos_uesb/controller/ControllerTelaCadastroEvento.dart';
 import 'package:eventos_uesb/controller/ControllerOrganizacao.dart';
+import 'package:eventos_uesb/controller/ControllerHomologacao.dart';
 
 class Routes {
   createRouteTable() {
@@ -31,7 +32,8 @@ class Routes {
       '/filtrar': (context) => const TelaFiltro(),
       '/eventDetails': (context) => const TelaEventoDetalhadoState(),
       '/RegisterEvent': (context) => const ControllerTelaCadastroEvento(),
-      '/controleOrganização': (context) => const ControllerOrganizacao()
+      '/controleOrganização': (context) => const ControllerOrganizacao(),
+      '/homologateUser': (context) => const ControllerHomologacao()
     });
   }
 }

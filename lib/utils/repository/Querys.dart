@@ -5,7 +5,7 @@ import 'package:eventos_uesb/utils/repository/DbConnection.dart';
 
 class Querys {
   createNewUser(nome, CPF, senha) async {
-    final login = {'nome': nome, 'cpf': CPF, 'senha': senha};
+    final login = {'nome': nome, 'cpf': CPF, 'senha': senha, 'isAdmin': false};
     var db = await DbConnection().getFirestoreInstance();
     db.collection('/login').doc(CPF).set(login);
   }
@@ -40,39 +40,43 @@ class Querys {
 
     var db = await DbConnection().getFirestoreInstance();
 
-    final eventsId = await db
-        .collection('/meusEventos')
-        .doc(user)
-        .collection('cidade')
-        .doc('$cidade')
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      return documentSnapshot.data();
-    });
-    if (eventsId != null && eventsId.isNotEmpty) {
-      for (var idEvent in eventsId.values) {
-        eventsIdPerCity.add(idEvent);
-      }
-      if (eventsIdPerCity.isNotEmpty) {
-        var docRef = await db
-            .collection('/$cidade')
-            .where('id', whereNotIn: eventsIdPerCity);
+    try {
+      final eventsId = await db
+          .collection('/meusEventos')
+          .doc(user)
+          .collection('cidade')
+          .doc('$cidade')
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        return documentSnapshot.data();
+      });
+      if (eventsId != null && eventsId.isNotEmpty) {
+        for (var idEvent in eventsId.values) {
+          eventsIdPerCity.add(idEvent);
+        }
+        if (eventsIdPerCity.isNotEmpty) {
+          var docRef = await db
+              .collection('/$cidade')
+              .where('id', whereNotIn: eventsIdPerCity);
 
-        var result = await docRef.get().then(
-          (QuerySnapshot querySnapshot) {
-            final data = querySnapshot.docs.map((doc) => doc.data()).toList();
-            return data;
-          },
-          onError: (e) => print("Error getting document: $e"),
-        );
+          var result = await docRef.get().then(
+            (QuerySnapshot querySnapshot) {
+              final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+              return data;
+            },
+            onError: (e) => print("Error getting document: $e"),
+          );
 
-        result.forEach((element) {
-          eventsPerUser.add(element);
-        });
+          result.forEach((element) {
+            eventsPerUser.add(element);
+          });
+        }
       }
+
+      return eventsPerUser;
+    } catch (e) {
+      return [];
     }
-
-    return eventsPerUser;
   }
 
   filterEvent(cidade, filtro, valorFiltro) async {
@@ -106,6 +110,16 @@ class Querys {
           .collection('/cidade')
           .doc('/$cidade')
           .set(subscribe);
+    }
+  }
+
+  setHomologateDoc(idEvent, cpf) async {
+    final subscribe = {'$cpf': cpf};
+    var db = await DbConnection().getFirestoreInstance();
+    try {
+      await db.collection('/homologar').doc('$idEvent').update(subscribe);
+    } catch (e) {
+      db.collection('/homologar').doc('$idEvent').set(subscribe);
     }
   }
 
@@ -263,6 +277,33 @@ class Querys {
     return collaborators;
   }
 
+  retrieveUsersToHomologate(idEvent) async {
+    var db = await DbConnection().getFirestoreInstance();
+    var users;
+    var usersToHomologate = [];
+
+    try {
+      users = await db
+          .collection('homologar')
+          .doc(idEvent)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        return documentSnapshot.data();
+      });
+
+      if (users != null && users.isNotEmpty) {
+        for (var collab in users.values) {
+          usersToHomologate.add(collab);
+        }
+      }
+    } catch (e) {
+      print(e);
+      usersToHomologate = [];
+    }
+
+    return usersToHomologate;
+  }
+
   insertArrayOfCollaborattors(collaborators, idEvent, colec) async {
     var db = await DbConnection().getFirestoreInstance();
 
@@ -271,5 +312,37 @@ class Querys {
     } catch (e) {
       await db.collection(colec).doc(idEvent).set({'cpf': collaborators});
     }
+  }
+
+  verifyUserInHomologated(eventId, userId) async {
+    var db = await DbConnection().getFirestoreInstance();
+
+    final docRef = await db.collection('/homologar').doc('$eventId');
+
+    final result = await docRef.get().then((DocumentSnapshot documentSnapshot) {
+      return documentSnapshot.data();
+    });
+
+    var userIndex = userId['idUser'];
+
+    return result[userIndex];
+  }
+
+  deleteUserFromHomolog(eventId, idUser) async {
+    var db = await DbConnection().getFirestoreInstance();
+    await db
+        .collection('/homologar')
+        .doc('$eventId')
+        .update({'$idUser': FieldValue.delete()});
+  }
+
+  removeEventFromUser(eventId, idUser, city) async {
+    var db = await DbConnection().getFirestoreInstance();
+    await db
+        .collection('/meusEventos')
+        .doc('$idUser')
+        .collection('/cidade')
+        .doc('$city')
+        .update({'$eventId': FieldValue.delete()});
   }
 }
