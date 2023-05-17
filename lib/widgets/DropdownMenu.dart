@@ -6,19 +6,31 @@ import 'package:eventos_uesb/assets/css/BasicCSS.dart';
 import 'package:eventos_uesb/domain/Events.dart';
 import 'package:eventos_uesb/widgets/FormCamp.dart';
 
-const List<String> list = <String>['Data', 'Departamento'];
+List<String> list = <String>['Data', 'Departamento'];
 
 class DropdownMenu extends State<DropdownButtonState> {
-  String dropdownValue = list.first;
+  var telaCriarEvento = false;
+  @override
+  void initState() {
+    super.initState();
+    telaCriarEvento = Events.getTelaCriarEvento();
+
+    if (telaCriarEvento) {
+      list = ['Não', 'Sim'];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     BasicCss basicCss = BasicCss();
+    String dropdownValue = list.first;
     return DropdownButton<String>(
       value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward, size: 35, color: Colors.black),
+      icon: Icon(Icons.arrow_downward,
+          size: telaCriarEvento ? 25 : 35, color: Colors.black),
       elevation: 16,
-      style: const TextStyle(color: Colors.black, fontSize: 30),
+      style:
+          TextStyle(color: Colors.black, fontSize: telaCriarEvento ? 15 : 30),
       borderRadius: BorderRadius.circular(20),
       underline: Container(
         height: 2,

@@ -20,7 +20,10 @@ class TelaEventos extends StatelessWidget {
         bottomNavigationBar: const NavigationMenu(),
         floatingActionButton: IconButton(
           onPressed: () => isAdmin
-              ? Navigator.pushNamed(context, '/RegisterEvent')
+              ? {
+                  Events.setTelaCriarEvento(),
+                  Navigator.pushNamed(context, '/RegisterEvent')
+                }
               : Navigator.pushNamed(context, '/filtrar'),
           icon: isAdmin ? const Icon(Icons.add) : const Icon(Icons.filter_alt),
           iconSize: isAdmin ? 60 : 40,

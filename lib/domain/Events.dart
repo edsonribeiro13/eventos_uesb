@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventos_uesb/utils/repository/Querys.dart';
+import 'package:eventos_uesb/utils/store/UserStore.dart';
 
 class Events {
   static List<Object?> events = [{}];
@@ -14,6 +15,8 @@ class Events {
   static String id = '';
   static bool userIsManager = false;
   static bool userIsCollaborator = false;
+  static bool telaCriarEvento = false;
+  static List usersToHomologate = [];
 
   static getAllEvents(eventName) async {
     Querys query = Querys();
@@ -26,9 +29,8 @@ class Events {
     Querys query = Querys();
     cidade = eventName;
 
-    try {
-      events = await query.getEventsUnsubscribed(eventName, cpf);
-    } catch (e) {
+    events = await query.getEventsUnsubscribed(eventName, cpf);
+    if (events.isEmpty) {
       events = await query.getEvents(eventName);
     }
   }
@@ -60,7 +62,8 @@ class Events {
       'limite': event['limite'],
       'organizador': event['organizador'],
       'local': event['local'],
-      'id': event['id']
+      'id': event['id'],
+      'verifyLimite': event['verifyLimite']
     };
   }
 
@@ -68,8 +71,12 @@ class Events {
     return eventDetailed;
   }
 
-  static subscribeToEvent(idEvent, cpf) async {
+  static subscribeToEvent(idEvent, cpf, verifyLimite) async {
     Querys querys = Querys();
+
+    if (verifyLimite) {
+      await querys.setHomologateDoc(idEvent, cpf);
+    }
     await querys.subscribeEvent(idEvent, cpf, Events.cidade);
   }
 
@@ -112,7 +119,8 @@ class Events {
       'limite': eventInserted[4].text,
       'local': eventInserted[5].text,
       'organizador': eventInserted[6].text,
-      'id': Timestamp.now().seconds
+      'id': Timestamp.now().seconds,
+      'verifyLimite': filterClause == 'sim'
     };
 
     Querys querys = Querys();
@@ -167,5 +175,52 @@ class Events {
     } else {
       manager.removeWhere((element) => element == collaborator);
     }
+  }
+
+  static setTelaCriarEvento() {
+    telaCriarEvento = true;
+  }
+
+  static getTelaCriarEvento() {
+    return telaCriarEvento;
+  }
+
+  static userIsHomologated(idEvent) async {
+    Querys querys = Querys();
+    var userCpf = await UserStore().getUser();
+
+    var isHomologated = await querys.verifyUserInHomologated(idEvent, userCpf);
+
+    if (isHomologated != null) {
+      return false;
+    }
+    return true;
+  }
+
+  static retrieveUsersToHomologate(idEvent) async {
+    Querys querys = Querys();
+    id = '$idEvent';
+
+    usersToHomologate = await querys.retrieveUsersToHomologate('$idEvent');
+  }
+
+  static getUsersToHomologate() {
+    return usersToHomologate;
+  }
+
+  static removeUser(collaborator) {
+    usersToHomologate.removeWhere((element) => element == collaborator);
+  }
+
+  static deleteUserFromHomolog(idUser) {
+    Querys querys = Querys();
+
+    querys.deleteUserFromHomolog(id, idUser);
+  }
+
+  static removeEventFromUser(idUser) {
+    Querys querys = Querys();
+
+    querys.removeEventFromUser(id, idUser, cidade);
   }
 }
