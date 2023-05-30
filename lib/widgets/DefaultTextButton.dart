@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:eventos_uesb/views/TelaValidarCertificado.dart';
 
 class DefaultTextButton extends StatelessWidget {
   const DefaultTextButton(

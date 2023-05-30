@@ -8,7 +8,7 @@ import 'package:eventos_uesb/widgets/FormCamp.dart';
 
 List<String> list = <String>['Data', 'Departamento'];
 
-class DropdownMenu extends State<DropdownButtonState> {
+class DropdownMenuLocal extends State<DropdownButtonState> {
   var telaCriarEvento = false;
   @override
   void initState() {

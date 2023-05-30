@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:eventos_uesb/assets/css/BasicCSS.dart';
