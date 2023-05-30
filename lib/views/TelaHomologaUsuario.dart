@@ -49,10 +49,9 @@ class TelaHomologaUsuario extends State<ControllerHomologacao> {
                                                   usersToHomologate[index]),
                                               await Events.removeUser(
                                                   usersToHomologate[index]),
-                                              setState(() => {
-                                                    usersToHomologate = Events
+                                              setState(() => usersToHomologate = Events
                                                         .getUsersToHomologate()
-                                                  })
+                                                  )
                                             },
                                         icon: const Icon(Icons.add)),
                                     IconButton(
@@ -64,17 +63,16 @@ class TelaHomologaUsuario extends State<ControllerHomologacao> {
                                                   usersToHomologate[index]),
                                               await Events.removeUser(
                                                   usersToHomologate[index]),
-                                              setState(() => {
-                                                    usersToHomologate = Events
+                                              setState(() => usersToHomologate = Events
                                                         .getUsersToHomologate()
-                                                  })
+                                                  )
                                             },
                                         icon: const Icon(Icons.delete))
                                   ]));
                         }))
-                : Row(
+                : const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                         Text(
                           "Usuário por homologar aparecerão aqui",
                           style: TextStyle(fontSize: 20),

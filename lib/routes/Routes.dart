@@ -15,6 +15,7 @@ import 'package:eventos_uesb/controller/ControllerTelaEventoDetalhado.dart';
 import 'package:eventos_uesb/controller/ControllerTelaCadastroEvento.dart';
 import 'package:eventos_uesb/controller/ControllerOrganizacao.dart';
 import 'package:eventos_uesb/controller/ControllerHomologacao.dart';
+import 'package:eventos_uesb/controller/ControllerTelaValidarPresenca.dart';
 
 class Routes {
   createRouteTable() {
@@ -33,7 +34,8 @@ class Routes {
       '/eventDetails': (context) => const TelaEventoDetalhadoState(),
       '/RegisterEvent': (context) => const ControllerTelaCadastroEvento(),
       '/controleOrganização': (context) => const ControllerOrganizacao(),
-      '/homologateUser': (context) => const ControllerHomologacao()
+      '/homologateUser': (context) => const ControllerHomologacao(),
+      '/validarPresença': (context) => const ControllerTelaValidarPresenca()
     });
   }
 }
